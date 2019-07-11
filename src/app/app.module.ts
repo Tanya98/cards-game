@@ -1,22 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {MaterialModule} from './shared/material/material.module';
-// import {ChildHttpModule} from "./core/http/http.module";
-import {HttpClientModule} from '@angular/common/http';
+import { MaterialModule } from './shared/material/material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { RoutingModule } from './core/routing/routing.module';
+import { environment } from 'src/environments/environment';
+import { LayoutModule } from '@angular/cdk/layout';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { SecuredLayoutComponent } from './shared/layout/secured-layout';
+import { PublicLayoutComponent } from './shared/layout/public-layout';
+import { NotFoundComponent } from './shared/not-found';
+import { StartPageComponent } from './shared/start-page/start-page.component';
+import { LoginComponent } from './features/account/login/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SecuredLayoutComponent,
+    PublicLayoutComponent,
+    StartPageComponent,
+    NotFoundComponent,
+    LoginComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-    // ChildHttpModule
+    RouterModule,
+    RoutingModule,
+    LayoutModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+
   ],
   providers: [],
   bootstrap: [AppComponent]
