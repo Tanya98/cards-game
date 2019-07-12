@@ -16,10 +16,10 @@ export const homepageReducer = (state = homePageInitialState, action: fromAction
     }
 
     case fromAction.SET_ALL_CARDS:{
-      const cards = action.payload;
+      const newCards = action.payload;
       return {
         ...state,
-        cards: state.cards.length === 0 ? [...state.cards.concat(...cards)] : state.cards,
+        cards: state.cards.length === 0 ? [...state.cards.concat(...newCards)] : state.cards,
       }
     }
 
