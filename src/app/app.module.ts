@@ -15,7 +15,6 @@ import { PublicLayoutComponent } from './shared/layout/public-layout';
 import { NotFoundComponent } from './shared/not-found';
 import { StartPageComponent } from './shared/start-page/start-page.component';
 import { LoginComponent } from './features/account/login/login.component';
-import {HomepageComponent} from "./features/homepage/homepage.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import {HomepageComponent} from "./features/homepage/homepage.component";
     StartPageComponent,
     NotFoundComponent,
     LoginComponent,
-    HomepageComponent
   ],
   imports: [
     CommonModule,
