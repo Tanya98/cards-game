@@ -9,6 +9,6 @@ import { InMemoryDataService } from './api/in-memory-data.service';
        InMemoryWebApiModule.forRoot(InMemoryDataService),
     ],
     exports: [HttpClientModule],
-    providers: [InMemoryDataService],
+    providers: [],
 })
 export class HttpModule { }

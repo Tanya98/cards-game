@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {Card} from "../models/card";
 
 @Injectable({ providedIn: 'root' })
 
@@ -11,7 +12,7 @@ export class DataService {
   constructor(public http: HttpClient){}
 
   public getPlayground1(){
-    return this.http.get(this.playground1);
+    return this.http.get(this.playground1)
   }
 
   public getPlayground2(){
@@ -21,4 +22,5 @@ export class DataService {
   public getPlayground3(){
     return this.http.get(this.playground3);
   }
+
 }
