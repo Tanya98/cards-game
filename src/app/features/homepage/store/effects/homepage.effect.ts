@@ -5,15 +5,16 @@ import {map, switchMap} from "rxjs/operators";
 import {Card} from "../../../../core/models/card";
 
 export class HomepageEffect {
-  constructor(private actions$: Actions, private dataService: DataService){}
+  constructor(private actions$: Actions, private dataService: DataService) {
+  }
 
   @Effect()
   loadCards$ = this.actions$.pipe(
     ofType(fromAction.GET_ALL_CARDS),
-    switchMap(()=>{
+    switchMap(() => {
       return this.dataService.getPlayground1()
         .pipe(
-          map((cards:Card[])=> new fromAction.SetallCards(cards))
+          map((cards: Card[]) => new fromAction.SetallCards(cards))
         )
     })
   )

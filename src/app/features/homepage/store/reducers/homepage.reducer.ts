@@ -22,7 +22,15 @@ export const homepageReducer = (state = homePageInitialState, action: fromAction
         cards: state.cards.length === 0 ? [...state.cards.concat(...newCards)] : state.cards,
       }
     }
-
+    // case fromAction.SELECT_TWO_CARDS:{
+    //  const id = action.payload;
+    //   return{
+    //     ...state,
+    //     cards: state.cards.filter((card)=> {
+    //
+    //     })
+    //     }
+    //   }
     default:
       return state;
   }

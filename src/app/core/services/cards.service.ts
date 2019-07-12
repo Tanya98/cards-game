@@ -17,4 +17,7 @@ export class CardsService {
     return this.store.dispatch(new action.GetallCards());
   }
 
+  remove(id:number){
+    return this.store.dispatch(new action.RemoveTwoCards(id));
+  }
 }
