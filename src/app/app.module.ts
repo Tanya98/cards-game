@@ -17,12 +17,12 @@ import { StartPageComponent } from './shared/start-page/start-page.component';
 import { LoginComponent } from './features/account/login/login.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NebularModule } from './shared/nebular/nebular.module';
-import {StoreModule} from "@ngrx/store";
-import {rootReducer} from "./store";
-import {EffectsModule} from "@ngrx/effects";
-import {HttpModule} from "./core/http/http.module";
-import {HomepageModule} from "./features/homepage/homepage.module";
-import {CardsService} from "./core/services/cards.service";
+import {StoreModule} from '@ngrx/store';
+import {rootReducer} from './store';
+import {EffectsModule} from '@ngrx/effects';
+import {HttpModule} from './core/http/http.module';
+import {CardsService} from './core/services/cards.service';
+import { CardpageModule } from './features/cardpage/cardpage.module';
 
 @NgModule({
   declarations: [
@@ -42,8 +42,11 @@ import {CardsService} from "./core/services/cards.service";
     RoutingModule,
     LayoutModule,
     HttpModule,
-    HomepageModule,
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    CardpageModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    }),
+    // !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forRoot(rootReducer()),
     EffectsModule.forRoot([]),
     NoopAnimationsModule,

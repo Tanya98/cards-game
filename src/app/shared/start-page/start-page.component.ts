@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Route, Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-start-page',
@@ -8,11 +8,11 @@ import {ActivatedRoute, Route, Router} from "@angular/router";
 })
 
 export class StartPageComponent implements OnInit {
-    constructor(public router:  Router ) { }
+    constructor(public router: Router ) { }
 
     ngOnInit() { }
 
-   public getStarted(){
-      this.router.navigate(['homepage']);
+   public getStarted() {
+      this.router.navigate(['cardpage']);
   }
 }

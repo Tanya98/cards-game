@@ -1,6 +1,6 @@
-import {homepageReducer as home} from '../features/homepage/store/reducers/homepage.reducer';
+import {cardpageReducer as card} from '../features/cardpage/store/reducers/cardpage.reducer';
 export const rootReducer = () => {
     return {
-       home,
+       card,
     };
 };
