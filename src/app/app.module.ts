@@ -43,10 +43,15 @@ import { CardpageModule } from './features/cardpage/cardpage.module';
     LayoutModule,
     HttpModule,
     CardpageModule,
-    StoreDevtoolsModule.instrument({
-      maxAge: 10
-    }),
-    // !environment.production ? StoreDevtoolsModule.instrument() : [],
+    // StoreModule.forRoot(rootReducer(), {
+    //   runtimeChecks: {
+    //     strictStateImmutability: true,
+    //     strictActionImmutability: true,
+    //     strictStateSerializability: true,
+    //     strictActionSerializability: true,
+    //   },
+    // }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forRoot(rootReducer()),
     EffectsModule.forRoot([]),
     NoopAnimationsModule,

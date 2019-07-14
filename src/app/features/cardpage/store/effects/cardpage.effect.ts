@@ -23,14 +23,14 @@ export class CardpageEffect {
     })
   );
 
-  @Effect()
-  selectCard$ = this.actions$.pipe(
-    ofType(fromAction.SELECTED_ONE_CARD),
-    map((card) => {
-      // debugger;
-      return new fromAction.CheckCard(card);
-    })
-  );
+  // @Effect()
+  // selectCard$ = this.actions$.pipe(
+  //   ofType(fromAction.SELECTED_ONE_CARD),
+  //   map((card) => {
+  //     // debugger;
+  //     return new fromAction.CheckCard(card);
+  //   })
+  // );
 
 
   // @Effect()
