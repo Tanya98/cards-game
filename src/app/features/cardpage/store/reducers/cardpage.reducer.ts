@@ -4,11 +4,13 @@ import * as fromAction from '../actions/index';
 export interface CardPageState {
   cards: Card[];
   selectedCard: Card;
+  showText:string;
 }
 
 export const cardPageInitialState: CardPageState = {
   cards: [],
   selectedCard: null,
+  showText: '',
 };
 
 export const cardpageReducer = (state = cardPageInitialState, action: fromAction.Action) => {
@@ -49,16 +51,7 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
           cards: state.cards
         }
       }
-
-      // } else if(state.cards.length!== 0){
-      //   const cardsLength = state.cards.length === 0;
-      //   return {
-      //     ...state,
-      //     cards: cardsLength.concat(...newCards)
-      //   }
-      // }
     }
-
 
     case fromAction.SELECTED_ONE_CARD: {
       const card = action.payload;
@@ -84,6 +77,14 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
         };
       }
     }
+
+    // case fromAction.SHOW_TEXT:{
+    //   // let text = action.payload;
+    //   return {
+    //     ...state,
+    //     showText: alert(action.payload),
+    //   }
+    // }
 
     default:
       return state;

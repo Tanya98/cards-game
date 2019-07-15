@@ -18,15 +18,24 @@ export class CardsService {
     this.checkCard$ = this.store.select((state: any) => state.cardpage.checkCard);
   }
 
-  getAllCards() {
-    return this.store.dispatch(new action.GetallCards());
+  getAllCardsPlaygroundFirst() {
+    return this.store.dispatch(new action.GetallCardsPlaygroundFirst());
+  }
+
+  getAllCardsPlaygroundSecond() {
+    // debugger;
+    return this.store.dispatch(new action.GetallCardsPlaygroundSecond());
+  }
+
+  getAllCardsPlaygroundThird() {
+    return this.store.dispatch(new action.GetallCardsPlaygroundThird());
   }
 
   selectedCard(card: Card) {
     return this.store.dispatch(new action.SelectedOneCard(card));
   }
-  // remove(id: number) {
-  //   this.store.dispatch(new action.RemoveTwoCards(id));
-  //   this.getAllCards();
-  // }
+
+  showText(string){
+    return this.store.dispatch((new action.ShowText(string)));
+  }
 }
