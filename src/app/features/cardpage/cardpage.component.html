@@ -1,19 +1,23 @@
 <div class="container">
   <header class="header">
     <nb-layout center>
-      <nb-layout-header class="header-top"></nb-layout-header>
+      <nb-layout-header class="header-top">
+
+        <button mat-stroked-button class="choose-but" (click)="choosePlaygroundFirst()">4:4</button>
+        <button mat-stroked-button class="choose-but" (click)="choosePlaygroundSecond()">6:6</button>
+        <button mat-stroked-button class="choose-but" (click)="choosePlaygroundThird()">8:8</button>
+
+      </nb-layout-header>
     </nb-layout>
   </header>
 
   <main>
-    <div class="content" *ngIf="(cards$ | async) as cards; else loading">
+    <div class="content" *ngIf="(cards$|async) as cards; else loading">
       <ng-container *ngFor="let card of cards">
-        <div class="card">
-          <div class="flipper">
-            <div class="front">
-              <!--            <img class="card-img" src="{{card.bg}}" alt="bg">-->
-            </div>
-            <div class="back" (click)="selectCard(card)">
+        <div class="card" (click)="addClass(card)">
+          <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
+            <div class="front"></div>
+            <div class="back">
               <img class="card-img" src="{{card.img}}" alt="img">
             </div>
           </div>
