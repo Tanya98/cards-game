@@ -13,8 +13,8 @@ export class CardpageEffect {
   ) { }
 
   @Effect()
-  loadCards$ = this.actions$.pipe(
-    ofType(fromAction.GET_ALL_CARDS),
+  loadCardsPlaygroundOne$ = this.actions$.pipe(
+    ofType(fromAction.GET_ALL_CARDS_PLAYGROUND_FIRST),
     switchMap(() => {
       return this.dataService.getPlayground1()
         .pipe(
@@ -23,22 +23,25 @@ export class CardpageEffect {
     })
   );
 
-  // @Effect()
-  // selectCard$ = this.actions$.pipe(
-  //   ofType(fromAction.SELECTED_ONE_CARD),
-  //   map((card) => {
-  //     // debugger;
-  //     return new fromAction.CheckCard(card);
-  //   })
-  // );
+  @Effect()
+  loadCardsPlaygroundTwo$ = this.actions$.pipe(
+    ofType(fromAction.GET_ALL_CARDS_PLAYGROUND_SECOND),
+    switchMap(() => {
+      return this.dataService.getPlayground2()
+        .pipe(
+          map((cards: Card[]) => new fromAction.SetallCards(cards))
+        );
+    })
+  );
 
-
-  // @Effect()
-  // removeCards$ = this.actions$.pipe(
-  //   ofType(fromAction.REMOVE_TWO_CARDS),
-  //   switchMap((id: number) => {
-  //     return this.cardsService.remove(id)
-  //     // .pipe(map(() => new fromAction.GetallCards()));
-  //   })
-  // )
+  @Effect()
+  loadCardsPlaygroundThree$ = this.actions$.pipe(
+    ofType(fromAction.GET_ALL_CARDS_PLAYGROUND_THIRD),
+    switchMap(() => {
+      return this.dataService.getPlayground3()
+        .pipe(
+          map((cards: Card[]) => new fromAction.SetallCards(cards))
+        );
+    })
+  );
 }

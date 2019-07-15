@@ -14,17 +14,51 @@ export const cardPageInitialState: CardPageState = {
 export const cardpageReducer = (state = cardPageInitialState, action: fromAction.Action) => {
 
   switch (action.type) {
-    case fromAction.GET_ALL_CARDS: {
-      return { ...state };
+    case fromAction.GET_ALL_CARDS_PLAYGROUND_FIRST: {
+      // debugger;
+      return {...state};
+    }
+
+    case fromAction.GET_ALL_CARDS_PLAYGROUND_SECOND: {
+      // debugger;
+      return {...state};
+    }
+
+    case fromAction.GET_ALL_CARDS_PLAYGROUND_THIRD: {
+      debugger;
+      return {...state};
     }
 
     case fromAction.SET_ALL_CARDS: {
+      // debugger;
       const newCards = action.payload;
-      return {
-        ...state,
-        cards: state.cards.length === 0 ? [...state.cards.concat(...newCards)] : state.cards,
-      };
+      if(state.cards.length===0) {
+        return {
+          ...state,
+          cards: state.cards.concat(...newCards)
+        }
+      } else {
+        if(state.cards.length!==0){
+          return {
+            ...state,
+            cards: [...[].concat(...newCards)]
+          }
+        }
+        return {
+          ...state,
+          cards: state.cards
+        }
+      }
+
+      // } else if(state.cards.length!== 0){
+      //   const cardsLength = state.cards.length === 0;
+      //   return {
+      //     ...state,
+      //     cards: cardsLength.concat(...newCards)
+      //   }
+      // }
     }
+
 
     case fromAction.SELECTED_ONE_CARD: {
       const card = action.payload;
@@ -51,33 +85,6 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
       }
     }
 
-    // case fromAction.CHECK_CARD: {
-    //   // debugger;
-    //   const card = action.payload;
-    //   return {
-    //     ...state,
-    //     checkCard: state.checkCard.push(card),
-    //     // cards: state.checkCard.forEach((item) => {
-    //     //   if (item.pairId === item.pairId) {
-    //     //     return state.cards.slice(item.pairId);
-    //     //   }
-    //     //   return state.checkCard.length = 0;
-    //     // })
-    //   };
-    // }
-
-    // case fromAction.REMOVE_TWO_CARDS: {
-    //   // const pairId = action.payload;
-    //   return {
-    //     ...state,
-    //     checkCard: state.checkCard.forEach(pairId => {
-    //       if (pairId.pairId === pairId.pairId) {
-    //         return state.cards.slice(pairId.pairId);
-    //       }
-    //       return state.cards;
-    //     })
-    //   };
-    // }
     default:
       return state;
   }
