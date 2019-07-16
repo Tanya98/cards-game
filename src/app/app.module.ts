@@ -14,7 +14,7 @@ import { SecuredLayoutComponent } from './shared/layout/secured-layout';
 import { PublicLayoutComponent } from './shared/layout/public-layout';
 import { NotFoundComponent } from './shared/not-found';
 import { StartPageComponent } from './shared/start-page/start-page.component';
-import { LoginComponent } from './features/account/login/login.component';
+// import { LoginComponent } from './features/account/login/login.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NebularModule } from './shared/nebular/nebular.module';
 import {StoreModule} from '@ngrx/store';
@@ -22,7 +22,9 @@ import {rootReducer} from './store';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpModule} from './core/http/http.module';
 import {CardsService} from './core/services/cards.service';
-import { CardpageModule } from './features/cardpage/cardpage.module';
+import {CardpageModule } from './features/cardpage/cardpage.module';
+import {LoginModule} from './features/account/login/login.module';
+import {ValidatorService} from "./core/services/validator.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { CardpageModule } from './features/cardpage/cardpage.module';
     PublicLayoutComponent,
     StartPageComponent,
     NotFoundComponent,
-    LoginComponent,
+    // LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { CardpageModule } from './features/cardpage/cardpage.module';
     LayoutModule,
     HttpModule,
     CardpageModule,
+    LoginModule,
     // StoreModule.forRoot(rootReducer(), {
     //   runtimeChecks: {
     //     strictStateImmutability: true,
@@ -57,7 +60,7 @@ import { CardpageModule } from './features/cardpage/cardpage.module';
     NoopAnimationsModule,
     NebularModule
   ],
-  providers: [CardsService],
+  providers: [CardsService,ValidatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

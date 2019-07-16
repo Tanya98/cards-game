@@ -1,0 +1,21 @@
+<div class="block-form"[formGroup]="form" #userForm="ngForm">
+<div class="form">
+
+  <h3>Welcome!</h3>
+
+  <div class="user-info">
+    <label>Email Address
+      <span class="required">*</span>
+    </label>
+    <input type="text" formControlName="email" value={{email}}>
+    <span class="error" *ngIf="form.controls['email'].invalid && form.controls['email'].dirty">{{form.controls['email'].errors.message}}</span>
+
+    <label>Password
+      <span class="required">*</span>
+    </label>
+    <input type="password" formControlName="password" value={{password}}>
+    <span class="error" *ngIf="form.controls['password'].invalid && form.controls['password'].dirty">{{form.controls['password'].errors.message}}</span>
+  </div>
+  <button class="but-login" [class.but-disabled]="userForm.invalid" [disabled]="userForm.invalid" (click)="goPlay()">Login</button>
+</div>
+</div>
