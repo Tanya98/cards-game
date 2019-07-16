@@ -2,6 +2,7 @@
   <header class="header">
     <nb-layout center>
       <nb-layout-header class="header-top">
+        <nb-menu-link-params></nb-menu-link-params>
 
         <div>
         <button mat-stroked-button class="choose-but" (click)="choosePlaygroundFirst()">4:4</button>
@@ -20,7 +21,7 @@
   </header>
 
   <main>
-    <div class="content" *ngIf="cards; else loading">
+    <div class="content" *ngIf="cards; else loading" [ngClass]="{'content2': cards.length ===32,'content3': cards.length ===64}" #card>
       <ng-container *ngFor="let card of cards">
         <div class="card" (click)="addClass(card)">
           <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
