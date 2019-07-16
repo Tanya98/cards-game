@@ -13,6 +13,6 @@ export class StartPageComponent implements OnInit {
     ngOnInit() { }
 
    public getStarted() {
-      this.router.navigate(['cardpage']);
+      this.router.navigate(['login']);
   }
 }
