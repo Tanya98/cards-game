@@ -287,6 +287,12 @@ export class InMemoryDataService implements InMemoryDbService {
         pairId: 14
       },
       {
+        id: 35,
+        img: '../../assets/images/infinity-stones.jpg',
+        bg: '../../assets/images/bg.jpg',
+        pairId: 18
+      },
+      {
         id: 31,
         img: '../../assets/images/raceta.jpg',
         bg: '../../assets/images/bg.jpg',
@@ -297,6 +303,24 @@ export class InMemoryDataService implements InMemoryDbService {
         img: '../../assets/images/thor.jpg',
         bg: '../../assets/images/bg.jpg',
         pairId: 16
+      },
+      {
+        id: 33,
+        img: '../../assets/images/green-arrow.jpg',
+        bg: '../../assets/images/bg.jpg',
+        pairId: 17
+      },
+      {
+        id: 34,
+        img: '../../assets/images/infinity-stones.jpg',
+        bg: '../../assets/images/bg.jpg',
+        pairId: 18
+      },
+      {
+        id: 36,
+        img: '../../assets/images/green-arrow.jpg',
+        bg: '../../assets/images/bg.jpg',
+        pairId: 17
       },
     ];
     const playground3: Card[] = [
