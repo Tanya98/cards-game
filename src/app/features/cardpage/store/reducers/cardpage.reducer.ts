@@ -4,7 +4,7 @@ import * as fromAction from '../actions/index';
 export interface CardPageState {
   cards: Card[];
   selectedCard: Card;
-  showText:string;
+  showText: string;
 }
 
 export const cardPageInitialState: CardPageState = {
@@ -18,38 +18,38 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
   switch (action.type) {
     case fromAction.GET_ALL_CARDS_PLAYGROUND_FIRST: {
       // debugger;
-      return {...state};
+      return { ...state };
     }
 
     case fromAction.GET_ALL_CARDS_PLAYGROUND_SECOND: {
       // debugger;
-      return {...state};
+      return { ...state };
     }
 
     case fromAction.GET_ALL_CARDS_PLAYGROUND_THIRD: {
-      debugger;
-      return {...state};
+      // debugger;
+      return { ...state };
     }
 
     case fromAction.SET_ALL_CARDS: {
       // debugger;
       const newCards = action.payload;
-      if(state.cards.length===0) {
+      if (state.cards.length === 0) {
         return {
           ...state,
           cards: state.cards.concat(...newCards)
-        }
+        };
       } else {
-        if(state.cards.length!==0){
+        if (state.cards.length !== 0) {
           return {
             ...state,
             cards: [...[].concat(...newCards)]
-          }
+          };
         }
         return {
           ...state,
           cards: state.cards
-        }
+        };
       }
     }
 

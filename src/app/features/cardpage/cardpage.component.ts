@@ -1,18 +1,17 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { CardsService } from '../../core/services/cards.service';
-import {interval, Observable, Subject, Subscription} from 'rxjs';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
 import { Card } from '../../core/models/card';
-import { map, takeUntil} from 'rxjs/operators';
-import {LoginComponent} from "../account/login/login.component";
+import { map, takeUntil } from 'rxjs/operators';
+import { LoginComponent } from "../account/login/login.component";
 
 @Component({
   selector: 'app-cardpage',
   templateUrl: './cardpage.component.html',
   styleUrls: ['./cardpage.component.scss']
 })
-export class CardpageComponent implements OnInit,OnDestroy {
+export class CardpageComponent implements OnInit, OnDestroy {
   cards$: Observable<Card[]>;
-  // multidimentionalArray = [];
   cards: Card[];
   activeCard: Card;
   timer: number = 0;
@@ -20,8 +19,6 @@ export class CardpageComponent implements OnInit,OnDestroy {
   timerSubscription: Subscription;
   cardsSubscription: Subscription;
   stopPlay$: Subject<any> = new Subject();
-
-  @ViewChild(LoginComponent,{static:false})login:LoginComponent;
 
   constructor(
     private cardsService: CardsService
@@ -31,7 +28,7 @@ export class CardpageComponent implements OnInit,OnDestroy {
     this.cardsSubscription = this.cards$.pipe(
       map((cards) => {
         this.cards = cards;
-        if (this.cards.length == 0) {
+        if (this.cards.length === 0) {
           this.stopTimer();
           this.countTicks();
         }
@@ -47,7 +44,7 @@ export class CardpageComponent implements OnInit,OnDestroy {
   selectCard(card: Card) {
     setTimeout(() => {
       return this.cardsService.selectedCard(card);
-    }, 700)
+    }, 700);
   }
 
   choosePlaygroundFirst() {
@@ -77,12 +74,12 @@ export class CardpageComponent implements OnInit,OnDestroy {
 
   startTimer() {
     this.stream = interval(1000);
-    this.timerSubscription= this.stream.pipe(
+    this.timerSubscription = this.stream.pipe(
       takeUntil(this.stopPlay$),
-    ).subscribe(v=> this.timer = v);
+    ).subscribe(v => this.timer = v);
   }
 
-  stopTimer(){
+  stopTimer() {
     // console.log(this.timer);
     this.stopPlay$.next();
     this.countTicks();
@@ -95,13 +92,13 @@ export class CardpageComponent implements OnInit,OnDestroy {
     this.cardsSubscription.unsubscribe();
   }
 
-  countTicks(){
+  countTicks() {
     let userInfo = localStorage.getItem('userInfo');
     let info = JSON.parse(userInfo);
-    if(this.timer!==0){
+    if (this.timer !== 0) {
       info.timer = this.timer;
       let user = JSON.stringify(info);
-      localStorage.setItem('userInfo',user);
+      localStorage.setItem('userInfo', user);
       console.log(user);
     }
   }
