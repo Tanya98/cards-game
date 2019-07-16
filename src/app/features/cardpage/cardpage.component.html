@@ -5,9 +5,9 @@
         <nb-menu-link-params></nb-menu-link-params>
 
         <div>
-        <button mat-stroked-button class="choose-but" (click)="choosePlaygroundFirst()">4:4</button>
-        <button mat-stroked-button class="choose-but" (click)="choosePlaygroundSecond()">6:6</button>
-        <button mat-stroked-button class="choose-but" (click)="choosePlaygroundThird()">8:8</button>
+          <button mat-stroked-button class="choose-but" (click)="choosePlaygroundFirst()">4:4</button>
+          <button mat-stroked-button class="choose-but" (click)="choosePlaygroundSecond()">6:6</button>
+          <button mat-stroked-button class="choose-but" (click)="choosePlaygroundThird()">8:8</button>
         </div>
         <div>
           {{timer}}
@@ -21,7 +21,8 @@
   </header>
 
   <main>
-    <div class="content" *ngIf="cards; else loading" [ngClass]="{'content2': cards.length ===32,'content3': cards.length ===64}" #card>
+    <div class="content" *ngIf="cards; else loading"
+      [ngClass]="{'content2': cards.length >16,'content3': cards.length >36}">
       <ng-container *ngFor="let card of cards">
         <div class="card" (click)="addClass(card)">
           <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
