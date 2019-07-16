@@ -26,7 +26,9 @@
       <ng-container *ngFor="let card of cards">
         <div class="card" (click)="addClass(card)">
           <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
-            <div class="front"></div>
+            <div class="front">
+              <img src="assets/images/logo.png" class="logo">
+            </div>
             <div class="back">
               <img class="card-img" src="{{card.img}}" alt="img">
             </div>
@@ -39,4 +41,8 @@
   <ng-template #loading>
     ...Loading
   </ng-template>
+
+  <!-- <ng-template > -->
+    <app-login #login></app-login>
+  <!-- </ng-template> -->
 </div>
