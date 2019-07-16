@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StartPageComponent } from 'src/app/shared/start-page/start-page.component';
 import { NotFoundComponent } from 'src/app/shared/not-found';
 import { PublicLayoutComponent } from '../../shared/layout/public-layout';
+import {SecuredLayoutComponent} from "../../shared/layout/secured-layout";
 
 const routes: Routes = [
     {
@@ -13,6 +14,16 @@ const routes: Routes = [
     path: '',
     component: PublicLayoutComponent,
     children: [
+      {
+        path: '',
+        loadChildren:()=>import('../../features/account/login/login.module').then(m=>m.LoginModule)
+      }
+    ]
+  },
+  {
+    path:'',
+    component: SecuredLayoutComponent,
+    children:[
       {
         path: '',
         loadChildren: () => import('../../features/cardpage/cardpage.module').then(m => m.CardpageModule)
