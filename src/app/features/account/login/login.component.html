@@ -16,6 +16,6 @@
     <input type="password" formControlName="password" value={{password}}>
     <span class="error" *ngIf="form.controls['password'].invalid && form.controls['password'].dirty">{{form.controls['password'].errors.message}}</span>
   </div>
-  <button class="but-login" [class.but-disabled]="userForm.invalid" [disabled]="userForm.invalid" (click)="goPlay()">Login</button>
+  <button class="but-login" [class.but-disabled]="userForm.invalid" [disabled]="userForm.invalid" (click)="goPlay(form.value)">Login</button>
 </div>
 </div>

@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
 
   public form;
-
+  public userInfo;
   constructor(
     public formBuilder: FormBuilder,
     public validator: ValidatorService,
@@ -26,7 +26,15 @@ export class LoginComponent implements OnInit {
   }
       ngOnInit(): void {}
 
-  goPlay(){
-    this.router.navigate(['cardpage']);
+      goPlay(value){
+      this.userInfo = JSON.stringify(value);
+
+      const email = value.email!=='';
+      const password = value.password!=='';
+
+        if(email&&password){
+          localStorage.setItem('userInfo', this.userInfo);
+          this.router.navigate(['cardpage']);
+        }
   }
 }
