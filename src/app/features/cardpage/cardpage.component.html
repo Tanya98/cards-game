@@ -3,16 +3,24 @@
     <nb-layout center>
       <nb-layout-header class="header-top">
 
+        <div>
         <button mat-stroked-button class="choose-but" (click)="choosePlaygroundFirst()">4:4</button>
         <button mat-stroked-button class="choose-but" (click)="choosePlaygroundSecond()">6:6</button>
         <button mat-stroked-button class="choose-but" (click)="choosePlaygroundThird()">8:8</button>
-
+        </div>
+        <div>
+          {{timer}}
+          <button (click)="stopTimer()">Stop</button>
+        </div>
+        <div>
+          <a routerLink="/login" class="but-logout">Logout</a>
+        </div>
       </nb-layout-header>
     </nb-layout>
   </header>
 
   <main>
-    <div class="content" *ngIf="(cards$|async) as cards; else loading">
+    <div class="content" *ngIf="cards; else loading">
       <ng-container *ngFor="let card of cards">
         <div class="card" (click)="addClass(card)">
           <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
