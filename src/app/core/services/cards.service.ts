@@ -10,16 +10,15 @@ export class CardsService {
 
   cards$: Observable<Card[]>;
   selectedCard$: Observable<Card>;
-  checkCard$: Observable<Card[]>;
 
   constructor(private store: Store<CardPageState>) {
     this.cards$ = this.store.select((state: any) => state.cardpage.cards);
     this.selectedCard$ = this.store.select((state: any) => state.cardpage.selectedCard);
-    this.checkCard$ = this.store.select((state: any) => state.cardpage.checkCard);
   }
 
-  getAllCardsPlaygroundFirst() {
-    return this.store.dispatch(new action.GetallCardsPlaygroundFirst());
+  getAllCards() {
+    debugger;
+    return this.store.dispatch(new action.GetallCards());
   }
 
   getAllCardsPlaygroundSecond() {

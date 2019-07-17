@@ -16,44 +16,45 @@ export const cardPageInitialState: CardPageState = {
 export const cardpageReducer = (state = cardPageInitialState, action: fromAction.Action) => {
 
   switch (action.type) {
-    case fromAction.GET_ALL_CARDS_PLAYGROUND_FIRST: {
+    case fromAction.GET_ALL_CARDS: {
       // debugger;
       return { ...state };
     }
 
-    case fromAction.GET_ALL_CARDS_PLAYGROUND_SECOND: {
-      // debugger;
-      return { ...state };
-    }
-
-    case fromAction.GET_ALL_CARDS_PLAYGROUND_THIRD: {
-      // debugger;
-      return { ...state };
-    }
+    // case fromAction.GET_ALL_CARDS_PLAYGROUND_SECOND: {
+    //   // debugger;
+    //   return { ...state };
+    // }
+    //
+    // case fromAction.GET_ALL_CARDS_PLAYGROUND_THIRD: {
+    //   // debugger;
+    //   return { ...state };
+    // }
 
     case fromAction.SET_ALL_CARDS: {
-      // debugger;
+      debugger;
       const newCards = action.payload;
       if (state.cards.length === 0) {
         return {
           ...state,
           cards: state.cards.concat(...newCards)
         };
-      } else {
-        if (state.cards.length !== 0) {
-          return {
-            ...state,
-            cards: [...[].concat(...newCards)]
-          };
-        }
+      }
+      // else {
+      //   if (state.cards.length !== 0) {
+      //     return {
+      //       ...state,
+      //       cards: [...[].concat(...newCards)]
+      //     };
+      //   }
         return {
           ...state,
           cards: state.cards
         };
-      }
-    }
+}
 
     case fromAction.SELECTED_ONE_CARD: {
+      // debugger;
       const card = action.payload;
       const selectedCard = state.selectedCard;
 

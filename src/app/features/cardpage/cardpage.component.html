@@ -4,38 +4,56 @@
       <nb-layout-header class="header-top">
         <nb-menu-link-params></nb-menu-link-params>
 
-        <div>
+        <div class="block-but size">
           <button mat-stroked-button class="choose-but" (click)="choosePlaygroundFirst()">4:4</button>
           <button mat-stroked-button class="choose-but" (click)="choosePlaygroundSecond()">6:6</button>
           <button mat-stroked-button class="choose-but" (click)="choosePlaygroundThird()">8:8</button>
         </div>
-        <div>
+
+        <div class="timer size">
           {{timer}}
           <button (click)="stopTimer()">Stop</button>
         </div>
-        <div>
+
+        <div class="but-logout size">
           <a routerLink="/login" class="but-logout">Logout</a>
         </div>
+
       </nb-layout-header>
     </nb-layout>
   </header>
 
   <main>
-    <div class="content" *ngIf="cards; else loading"
-      [ngClass]="{'content2': cards.length >16,'content3': cards.length >36}">
-      <ng-container *ngFor="let card of cards">
-        <div class="card" (click)="addClass(card)">
-          <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
-            <div class="front">
-              <img src="assets/images/logo.png" class="logo">
+<!--    <div class="content" *ngIf="cards; else loading"-->
+<!--      [ngClass]="{'content2': cards.length >16,'content3': cards.length >36}">-->
+<!--      <ng-container *ngFor= "let card of cards">-->
+<!--        <div class="card" (click)="addClass(card)">-->
+<!--          <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">-->
+<!--            <div class="front">-->
+<!--              <img src="assets/images/logo.png" class="logo">-->
+<!--            </div>-->
+<!--            <div class="back">-->
+<!--              <img class="card-img" src="{{card.img}}" alt="img">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </ng-container>-->
+<!--    </div>-->
+        <div class="content" *ngIf="playground; else loading"
+          [ngClass]="{'content2': playground.length >16,'content3': playground.length >36}">
+          <ng-container *ngFor= "let card of playground">
+            <div class="card" (click)="addClass(card)">
+              <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
+                <div class="front">
+                  <img src="assets/images/logo.png" class="logo">
+                </div>
+                <div class="back">
+                  <img class="card-img" src="{{card.img}}" alt="img">
+                </div>
+              </div>
             </div>
-            <div class="back">
-              <img class="card-img" src="{{card.img}}" alt="img">
-            </div>
-          </div>
+          </ng-container>
         </div>
-      </ng-container>
-    </div>
   </main>
 
   <ng-template #loading>
@@ -43,6 +61,6 @@
   </ng-template>
 
   <!-- <ng-template > -->
-    <app-login #login></app-login>
+<!--    <app-login #login></app-login>-->
   <!-- </ng-template> -->
 </div>
