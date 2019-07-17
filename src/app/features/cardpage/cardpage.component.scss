@@ -2,9 +2,20 @@
     background: #413fa0;
     height: 85px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
+  .size {
+    width: 200px;
+    margin-left: 100px;
+  }
+
+  .timer {
+    color: white;
+    font-weight: 600;
+    font-size: 30px;
+    text-align: center;
+  }
     .choose-but {
         margin-left: 20px;
         border: 0;

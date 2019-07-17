@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
 
   public form;
   public userInfo;
+  public allInfo = [];
   constructor(
     public formBuilder: FormBuilder,
     public validator: ValidatorService,
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, this.validator.validPassword]]
     });
   }
-  ngOnInit(): void { }
+  ngOnInit() {
+  }
 
   goPlay(value) {
     this.userInfo = JSON.stringify(value);
