@@ -1,9 +1,8 @@
-import {Component, OnInit, OnDestroy, ViewChild, DoCheck, AfterViewInit} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, DoCheck, AfterViewInit } from '@angular/core';
 import { CardsService } from '../../core/services/cards.service';
 import { interval, Observable, Subject, Subscription } from 'rxjs';
 import { Card } from '../../core/models/card';
-import { map, takeUntil } from 'rxjs/operators';
-import { LoginComponent } from "../account/login/login.component";
+import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cardpage',
@@ -13,7 +12,7 @@ import { LoginComponent } from "../account/login/login.component";
 export class CardpageComponent implements OnInit, OnDestroy {
   cards$: Observable<Card[]>;
   cards: Card[];
-  playground:Card[];
+  playground: Card[];
   activeCard: Card;
   timer: number = 0;
   stream: Observable<any>;
@@ -24,12 +23,10 @@ export class CardpageComponent implements OnInit, OnDestroy {
   constructor(
     private cardsService: CardsService
   ) {
-    // this.cardsService.getAllCards();
     this.cards$ = this.cardsService.cards$;
     this.cardsSubscription = this.cards$.pipe(
-      map((cards) => {
+      tap((cards) => {
         this.cards = cards;
-        // console.log(this.cards);
         if (this.cards.length === 0) {
           this.stopTimer();
           this.countTicks();
@@ -39,35 +36,36 @@ export class CardpageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.choosePlaygroundFirst();
+    this.easyMode();
   }
 
   selectCard(card: Card) {
-    // debugger;
     setTimeout(() => {
       return this.cardsService.selectedCard(card);
     }, 700);
   }
 
-  choosePlaygroundFirst() {
-    this.cardsService.getAllCards();
-    this.playground = this.cards.slice(0,16);
+  easyMode() {
+    const _4X4 = 16;
+    this.cardsService.getCards(_4X4);
+    this.changeMode();
+  }
+
+  mediumMode() {
+    const _6X6 = 36;
+    this.cardsService.getCards(_6X6);
+    this.changeMode();
+  }
+
+  hardMode() {
+    const _8X8 = 64;
+    this.cardsService.getCards(_8X8);
+    this.changeMode();
+  }
+
+  changeMode(){
     this.stopTimer();
     this.countTicks();
-    this.startTimer();
-  }
-
-  choosePlaygroundSecond() {
-    // this.cardsService.getAllCards();
-    this.playground = this.cards.slice(0,36);
-    this.stopTimer();
-    this.startTimer();
-  }
-
-  choosePlaygroundThird() {
-    // this.cardsService.getAllCards();
-    this.playground = this.cards.slice(0,64);
-    this.stopTimer();
     this.startTimer();
   }
 
@@ -77,7 +75,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
 
   startTimer() {
     this.stream = interval(1000);
-    this.timerSubscription = this.stream.pipe(
+    this.stream.pipe(
       takeUntil(this.stopPlay$),
     ).subscribe(v => this.timer = v);
   }
@@ -94,25 +92,25 @@ export class CardpageComponent implements OnInit, OnDestroy {
   }
 
   countTicks() {
-    let userInfo = localStorage.getItem('userInfo');
-    let info = JSON.parse(userInfo);
+    const userInfo = localStorage.getItem('userInfo');
+    const info = JSON.parse(userInfo);
     if (this.timer !== 0) {
 
-      if(this.cards.length === 16){
+      if (this.cards.length === 16) {
         info.timerPlaygroundFirst = this.timer;
-        let user = JSON.stringify(info);
+        const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
       }
 
-      if(this.cards.length === 36){
+      if (this.cards.length === 36) {
         info.timerPlaygroundSecond = this.timer;
-        let user = JSON.stringify(info);
+        const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
       }
 
-      if(this.cards.length === 64){
+      if (this.cards.length === 64) {
         info.timerPlaygroundThird = this.timer;
-        let user = JSON.stringify(info);
+        const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
       }
       this.addUser();
@@ -131,17 +129,17 @@ export class CardpageComponent implements OnInit, OnDestroy {
     }
 
     getAllInfo.forEach(user => {
-      if(user.email === getUser.email){
-        let deleteUser = getAllInfo.filter(x=>x.email !== getUser.email);
+      if (user.email === getUser.email) {
+        let deleteUser = getAllInfo.filter(x => x.email !== getUser.email);
         deleteUser.push(getUser);
         let newUser = JSON.stringify(deleteUser);
         localStorage.setItem('allInfo', newUser);
       }
-      if(user.email!==getUser.email){
+      if (user.email !== getUser.email) {
         getAllInfo.push(getUser);
         let newUser = JSON.stringify(getAllInfo);
         localStorage.setItem('allInfo', newUser);
       }
-    })
+    });
   }
 }

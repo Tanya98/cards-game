@@ -16,67 +16,41 @@ export const cardPageInitialState: CardPageState = {
 export const cardpageReducer = (state = cardPageInitialState, action: fromAction.Action) => {
 
   switch (action.type) {
-    case fromAction.GET_ALL_CARDS: {
-      // debugger;
-      return { ...state };
-    }
-
-    // case fromAction.GET_ALL_CARDS_PLAYGROUND_SECOND: {
-    //   // debugger;
-    //   return { ...state };
-    // }
-    //
-    // case fromAction.GET_ALL_CARDS_PLAYGROUND_THIRD: {
-    //   // debugger;
-    //   return { ...state };
-    // }
 
     case fromAction.SET_ALL_CARDS: {
-      debugger;
-      const newCards = action.payload;
-      if (state.cards.length === 0) {
-        return {
-          ...state,
-          cards: state.cards.concat(...newCards)
-        };
-      }
-      // else {
-      //   if (state.cards.length !== 0) {
-      //     return {
-      //       ...state,
-      //       cards: [...[].concat(...newCards)]
-      //     };
-      //   }
-        return {
-          ...state,
-          cards: state.cards
-        };
-}
+      return {
+        ...state,
+        cards: [...action.payload]
+      };
+    }
 
-    case fromAction.SELECTED_ONE_CARD: {
-      // debugger;
-      const card = action.payload;
-      const selectedCard = state.selectedCard;
+    case fromAction.SET_ONE_CARD: {
+      return {
+        ...state,
+        selectedCard: action.card
+      };
+    }
 
-      if (selectedCard === null) {
-        return {
-          ...state,
-          selectedCard: card
-        };
-      } else {
-        if (selectedCard.pairId === card.pairId) {
-          const cards = state.cards.filter(x => x.pairId !== selectedCard.pairId);
-          return {
-            ...state,
-            selectedCard: null,
-            cards: [...cards]
-          };
-        }
-        return {
-          ...state,
-          selectedCard: null,
-        };
-      }
+    case fromAction.TRY_MATCH_CARDS: {
+      return {
+        ...state,
+        selectedCard: null
+      };
+    }
+
+    case fromAction.MATCH_CARDS_SUCCESS: {
+      return {
+        ...state,
+        cards: state.cards.filter(x => x.pairId !== action.pairId),
+        selectedCard: null
+      };
+    }
+
+    case fromAction.MATCH_CARDS_FAILED: {
+      return {
+        ...state,
+        selectedCard: null
+      };
     }
 
     // case fromAction.SHOW_TEXT:{

@@ -16,25 +16,15 @@ export class CardsService {
     this.selectedCard$ = this.store.select((state: any) => state.cardpage.selectedCard);
   }
 
-  getAllCards() {
-    debugger;
-    return this.store.dispatch(new action.GetallCards());
-  }
-
-  getAllCardsPlaygroundSecond() {
-    // debugger;
-    return this.store.dispatch(new action.GetallCardsPlaygroundSecond());
-  }
-
-  getAllCardsPlaygroundThird() {
-    return this.store.dispatch(new action.GetallCardsPlaygroundThird());
+  getCards(count: number) {
+    return this.store.dispatch(new action.GetallCards(count));
   }
 
   selectedCard(card: Card) {
-    return this.store.dispatch(new action.SelectedOneCard(card));
+    return this.store.dispatch(new action.SelectOneCard(card));
   }
 
-  showText(string){
-    return this.store.dispatch((new action.ShowText(string)));
+  showText(text: string) {
+    return this.store.dispatch((new action.ShowText(text)));
   }
 }
