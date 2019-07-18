@@ -5,14 +5,14 @@
         <nb-menu-link-params></nb-menu-link-params>
 
         <div class="block-but size">
-          <button mat-stroked-button class="choose-but" (click)="easyMode()">4:4</button>
-          <button mat-stroked-button class="choose-but" (click)="mediumMode()">6:6</button>
-          <button mat-stroked-button class="choose-but" (click)="hardMode()">8:8</button>
+          <button mat-stroked-button class="choose-but" id="1" (click)="easyMode($event)">4:4</button>
+          <button mat-stroked-button class="choose-but" id="2" (click)="mediumMode($event)">6:6</button>
+          <button mat-stroked-button class="choose-but" id="3" (click)="hardMode($event)">8:8</button>
         </div>
 
         <div class="timer size">
           {{timer}}
-          <button (click)="stopTimer()">Stop</button>
+<!--          <button (click)="stopTimer()">Stop</button>-->
         </div>
 
         <div class="but-logout size">
@@ -24,7 +24,7 @@
   </header>
 
   <main>
-    <div class="content" *ngIf="(cards$ | async) as cards; else loading"
+    <div class="content" *ngIf="cards; else loading"
       [ngClass]="{'content2': cards.length >16,'content3': cards.length >36}">
       <ng-container *ngFor="let card of cards">
         <div class="card" (click)="addClass(card)">
