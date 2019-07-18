@@ -17,14 +17,15 @@ import { StartPageComponent } from './shared/start-page/start-page.component';
 // import { LoginComponent } from './features/account/login/login.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NebularModule } from './shared/nebular/nebular.module';
-import {StoreModule} from '@ngrx/store';
-import {rootReducer} from './store';
-import {EffectsModule} from '@ngrx/effects';
-import {HttpModule} from './core/http/http.module';
-import {CardsService} from './core/services/cards.service';
-import {CardpageModule } from './features/cardpage/cardpage.module';
-import {LoginModule} from './features/account/login/login.module';
-import {ValidatorService} from "./core/services/validator.service";
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from './store';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpModule } from './core/http/http.module';
+import { CardsService } from './core/services/cards.service';
+import { CardpageModule } from './features/cardpage/cardpage.module';
+import { LoginModule } from './features/account/login/login.module';
+import { ValidatorService } from './core/services/validator.service';
+import {RatingModule} from './features/rating/rating.module';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {ValidatorService} from "./core/services/validator.service";
     HttpModule,
     CardpageModule,
     LoginModule,
+    RatingModule,
     // StoreModule.forRoot(rootReducer(), {
     //   runtimeChecks: {
     //     strictStateImmutability: true,
@@ -60,7 +62,7 @@ import {ValidatorService} from "./core/services/validator.service";
     NoopAnimationsModule,
     NebularModule
   ],
-  providers: [CardsService,ValidatorService],
+  providers: [CardsService, ValidatorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
