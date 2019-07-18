@@ -17,8 +17,10 @@ export class LoginComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public validator: ValidatorService,
-    public router: Router
-  ) {
+    public router: Router,
+    // public allInfo = [],
+
+) {
 
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, this.validator.validEmail]],
@@ -26,11 +28,15 @@ export class LoginComponent implements OnInit {
     });
   }
   ngOnInit() {
+    let getAllInfo = localStorage.getItem('allInfo');
+     if(getAllInfo === null){
+       let allInfo = JSON.stringify(this.allInfo);
+       localStorage.setItem('allInfo',allInfo);
+     }
   }
 
   goPlay(value) {
     this.userInfo = JSON.stringify(value);
-
     const email = value.email !== '';
     const password = value.password !== '';
 
