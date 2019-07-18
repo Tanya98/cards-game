@@ -3,14 +3,14 @@ import * as fromAction from '../actions/index';
 
 export interface CardPageState {
   cards: Card[];
-  selectedCard: Card;
+  selectedCard: Card[];
   showText: string;
 }
 
 export const cardPageInitialState: CardPageState = {
   cards: [],
-  selectedCard: null,
-  showText: '',
+  selectedCard: [],
+  showText: 'My Gongratilations!',
 };
 
 export const cardpageReducer = (state = cardPageInitialState, action: fromAction.Action) => {
@@ -24,34 +24,62 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
       };
     }
 
-    case fromAction.SET_ONE_CARD: {
+    case fromAction.SELECTED_ONE_CARD: {
+      // debugger;
       return {
         ...state,
-        selectedCard: action.card
+        selectedCard: [...state.selectedCard, action.card]
       };
     }
 
-    case fromAction.TRY_MATCH_CARDS: {
+    case fromAction.DELETE_CARDS: {
+      let newCards;
+      state.selectedCard.forEach(card => {
+        return newCards = state.cards.filter(sl=> sl.pairId!==card.pairId);
+      });
       return {
         ...state,
-        selectedCard: null
+        cards: newCards,
+        selectedCard: []
       };
     }
 
-    case fromAction.MATCH_CARDS_SUCCESS: {
+    case fromAction.CLEAR: {
       return {
         ...state,
-        cards: state.cards.filter(x => x.pairId !== action.pairId),
-        selectedCard: null
+        selectedCard: []
       };
     }
 
-    case fromAction.MATCH_CARDS_FAILED: {
+    case fromAction.WIN: {
       return {
         ...state,
-        selectedCard: null
+        selectedCard: [],
+        showText: alert(state.showText),
       };
     }
+    //
+    // case fromAction.TRY_MATCH_CARDS: {
+    //   return {
+    //     ...state,
+    //     selectedCard: null
+    //   };
+    // }
+    //
+    // case fromAction.MATCH_CARDS_SUCCESS: {
+    //   return {
+    //     ...state,
+    //     cards: state.cards.filter(x => x.pairId !== action.pairId),
+    //     selectedCard: null
+    //   };
+    // }
+    //
+    // case fromAction.MATCH_CARDS_FAILED: {
+    //   return {
+    //     ...state,
+    //     selectedCard: null
+    //   };
+    // }
 
     // case fromAction.SHOW_TEXT:{
     //   // let text = action.payload;

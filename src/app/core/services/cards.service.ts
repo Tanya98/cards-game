@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class CardsService {
 
   cards$: Observable<Card[]>;
-  selectedCard$: Observable<Card>;
+  selectedCard$: Observable<Card[]>;
 
   constructor(private store: Store<CardPageState>) {
     this.cards$ = this.store.select((state: any) => state.cardpage.cards);
@@ -24,7 +24,14 @@ export class CardsService {
     return this.store.dispatch(new action.SelectOneCard(card));
   }
 
-  showText(text: string) {
-    return this.store.dispatch((new action.ShowText(text)));
+  deleteCards(){
+    return this.store.dispatch(new action.DeleteCards());
+  }
+
+  clear(){
+    return this.store.dispatch(new action.ClearAll());
+  }
+  win(){
+    return this.store.dispatch((new action.WinAction()));
   }
 }
