@@ -3,6 +3,7 @@ import { CardsService } from '../../core/services/cards.service';
 import { interval, Observable, Subject, Subscription } from 'rxjs';
 import { Card } from '../../core/models/card';
 import {filter, map, takeUntil, tap} from 'rxjs/operators';
+import {User} from "../../core/models/user";
 
 @Component({
   selector: 'app-cardpage',
@@ -15,6 +16,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
   selectedCards$: Observable<Card[]>;
   cards: Card[];
   activeCard: Card;
+  hasFlippedCard:boolean = false;
   timer: number = 0;
   stream: Observable<any>;
   getEventTarget:any;
@@ -47,6 +49,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
     this.selectedCardsSubscription = this.selectedCards$.pipe(
       filter(sl=> !!sl[0]&&!!sl[1])
     ).subscribe(sl => {
+      // debugger;
         if(sl[0].pairId == sl[1].pairId){
           return this.cardsService.deleteCards();
         } else {
@@ -88,6 +91,13 @@ export class CardpageComponent implements OnInit, OnDestroy {
     this.startTimer();
   }
 
+  showCongrat(){
+    debugger;
+  if(this.cards.length==0) {
+  return this.cardsService.win();
+     }
+  }
+
   addClass(card) {
     this.activeCard = card;
   }
@@ -115,20 +125,21 @@ export class CardpageComponent implements OnInit, OnDestroy {
     const userInfo = localStorage.getItem('userInfo');
     const info = JSON.parse(userInfo);
     if (this.timer !== 0) {
-    debugger;
-      if (this.getEventTarget === '1') {
+    // debugger;
+      if (this.getEventTarget === '1'&& this.cards.length === 0) {
         info.timerPlaygroundFirst = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
+        this.showCongrat();
       }
 
-      if (this.getEventTarget === '2') {
+      if (this.getEventTarget === '2' && this.cards.length === 0) {
         info.timerPlaygroundSecond = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
       }
 
-      if (this.getEventTarget === '3') {
+      if (this.getEventTarget === '3' && this.cards.length === 0) {
         info.timerPlaygroundThird = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
@@ -138,18 +149,18 @@ export class CardpageComponent implements OnInit, OnDestroy {
   }
 
   addUser() {
-    let getUser = JSON.parse(localStorage.getItem('userInfo'));
+    let getUser:User = JSON.parse(localStorage.getItem('userInfo'));
     let getAllInfo = JSON.parse(localStorage.getItem('allInfo'));
 
-    if (getAllInfo.length === 0) {
-      debugger;
+    if (getAllInfo.length === 0 && getUser.timerPlaygroundFirst ||
+        getAllInfo.length === 0 && getUser.timerPlaygroundSecond||
+        getAllInfo.length === 0 && getUser.timerPlaygroundThird) {
       getAllInfo.push(getUser);
       let newUser = JSON.stringify(getAllInfo);
       localStorage.setItem('allInfo', newUser);
     }
 
     getAllInfo.forEach(user => {
-      debugger;
       if (user.email === getUser.email) {
         let deleteUser = getAllInfo.filter(x => x.email !== getUser.email);
         deleteUser.push(getUser);
