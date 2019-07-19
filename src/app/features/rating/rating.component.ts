@@ -9,18 +9,13 @@ import { User } from 'src/app/core/models/user';
 
 export class RatingComponent implements OnInit {
 
-    public bestUsers: number = 5;
-    public bestCore4x4: number = 40;
-    public bestCore6x6: number = 165;
-    public bestCore8x8: number = 340;
-
+    public bestUsersNumber: number = 5;
+    public bestUsers =[];
     public sortedUsers4x4: User[] = [];
     public sortedUsers6x6: User[] = [];
     public sortedUsers8x8: User[] = [];
 
-    public getUsers: User[] = [];
-    public selectedUsers: User[] = [];
-    public sortable: any = [];
+    public allUsers: User[] = [];
 
     constructor() { }
 
@@ -29,32 +24,32 @@ export class RatingComponent implements OnInit {
     }
 
     sortUsers() {
-        this.getUsers = JSON.parse(localStorage.getItem('allInfo'));
-        console.log(this.getUsers);
-        // this.selectedUsers = this.getUsers.slice(0, this.bestUsers);
+        this.allUsers = JSON.parse(localStorage.getItem('allInfo'));
+        console.log(this.allUsers);
 
-        this.sortedUsers4x4 = this.getUsers.sort((a, b) => {
-            // debugger;
-            return a.timerPlaygroundFirst - b.timerPlaygroundFirst;
-        });
-
-        this.sortedUsers6x6 = this.getUsers.sort((a, b) => {
-            debugger;
-            if (typeof a.timerPlaygroundSecond !== 'undefined') {
-                if (typeof b.timerPlaygroundFirst !== 'undefined') {
-                    return a.timerPlaygroundSecond - b.timerPlaygroundSecond;
-                }
+        this.sortedUsers4x4 = [...this.allUsers].sort((a, b) => {
+            this.bestUsers = this.sortedUsers4x4 = [];
+            if ( a.timerPlaygroundFirst !== undefined && b.timerPlaygroundFirst !== undefined) {
+              return a.timerPlaygroundFirst - b.timerPlaygroundFirst;
             }
         });
 
-        this.sortedUsers8x8 = this.getUsers.sort((a, b) => {
+        this.bestUsers = this.sortedUsers4x4.slice(0,this.bestUsersNumber);
+
+        this.sortedUsers6x6 = [...this.allUsers].sort((a, b) => {
+            if (a.timerPlaygroundSecond !== undefined && b.timerPlaygroundFirst !== undefined) {
+              return a.timerPlaygroundSecond - b.timerPlaygroundSecond;
+            }
+        });
+
+      this.bestUsers = this.sortedUsers6x6.slice(0, this.bestUsersNumber);
+
+        this.sortedUsers8x8 = [...this.allUsers].sort((a, b) => {
             if (a.timerPlaygroundThird !== undefined || b.timerPlaygroundThird !== undefined) {
                 return a.timerPlaygroundThird - b.timerPlaygroundThird;
             }
         });
-        // console.log(`First ${this.sortedUsers4x4}`);
-        // console.log(`Second ${this.sortedUsers6x6}`);
-        // console.log(`Third  ${this.sortedUsers8x8}`);
 
+      this.bestUsers = this.sortedUsers8x8.slice(0, this.bestUsersNumber);
     }
 }

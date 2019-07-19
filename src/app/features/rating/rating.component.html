@@ -1,20 +1,39 @@
-<div>
-<!-- <div>
-    <ng-container *ngFor="let user of sortedUsers4x4">
-        <p>{{user.email}}</p>
-        <span>{{user.timerPlaygroundFirst}}</span>
-    </ng-container>
-</div> -->
-<div>
-    <ng-container *ngFor="let user of sortedUsers6x6">
-        <p>{{user.email}}</p>
-        <span>{{user.timerPlaygroundSecond}}</span>
-    </ng-container>
+<div class="container">
+
+<div class="main-block">
+
+  <div class="block-field">
+    <p class="title">First field rating</p>
+  <ng-container *ngFor="let user of bestUsers">
+  <mat-list>
+    <mat-list-item>{{user.email}} {{user.timerPlaygroundFirst}}</mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+  </ng-container>
+  </div>
+
+  <div class="block-field">
+    <p class="title">Second field rating</p>
+    <ng-container *ngFor="let user of bestUsers">
+    <mat-list>
+      <mat-list-item>{{user.email}} {{user.timerPlaygroundSecond}}</mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </ng-container>
+  </div>
+
+  <div class="block-field block">
+    <p class="title">Third field rating</p>
+    <ng-container *ngFor="let user of bestUsers">
+    <mat-list>
+      <mat-list-item>{{user.email}} {{user.timerPlaygroundThird}}</mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </ng-container>
+  </div>
+
 </div>
-<!-- <div>
-    <ng-container *ngFor="let user of sortedUsers8x8">
-        <p>{{user.email}}</p>
-        <span>{{user.timerPlaygroundThird}}</span>
-    </ng-container>
-</div> -->
+
+  <button class="but-arrow" routerLink="/cardpage"><i class="fas fa-long-arrow-alt-right"></i></button>
+
 </div>
