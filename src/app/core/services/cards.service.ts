@@ -24,14 +24,14 @@ export class CardsService {
     return this.store.dispatch(new action.SelectOneCard(card));
   }
 
-  deleteCards(){
+  deleteCards() {
     return this.store.dispatch(new action.DeleteCards());
   }
 
-  clear(){
+  clear() {
     return this.store.dispatch(new action.ClearAll());
   }
-  win(){
-    return this.store.dispatch((new action.WinAction()));
+  win(congratulation) {
+    return this.store.dispatch((new action.WinAction(congratulation)));
   }
 }

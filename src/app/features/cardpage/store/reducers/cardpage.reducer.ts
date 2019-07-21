@@ -4,13 +4,11 @@ import * as fromAction from '../actions/index';
 export interface CardPageState {
   cards: Card[];
   selectedCard: Card[];
-  showText: string;
 }
 
 export const cardPageInitialState: CardPageState = {
   cards: [],
   selectedCard: [],
-  showText: 'My Gongratilations!',
 };
 
 export const cardpageReducer = (state = cardPageInitialState, action: fromAction.Action) => {
@@ -25,7 +23,6 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
     }
 
     case fromAction.SELECTED_ONE_CARD: {
-      // debugger;
       return {
         ...state,
         selectedCard: [...state.selectedCard, action.card]
@@ -35,7 +32,7 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
     case fromAction.DELETE_CARDS: {
       let newCards;
       state.selectedCard.forEach(card => {
-        return newCards = state.cards.filter(sl=> sl.pairId!==card.pairId);
+        return newCards = state.cards.filter(sl => sl.pairId !== card.pairId);
       });
       return {
         ...state,
@@ -51,13 +48,13 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
       };
     }
 
-    case fromAction.WIN: {
-      return {
-        ...state,
-        selectedCard: [],
-        showText: alert(state.showText),
-      };
-    }
+    // case fromAction.WIN: {
+    //   return {
+    //     ...state,
+    //     selectedCard: [],
+    //     showCongratulation: action.congratulation
+    //   };
+    // }
     //
     // case fromAction.TRY_MATCH_CARDS: {
     //   return {

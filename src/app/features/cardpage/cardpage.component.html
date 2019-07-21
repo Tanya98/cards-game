@@ -9,14 +9,14 @@
         </div>
 
         <div class="block-but size">
-          <button mat-stroked-button class="choose-but" id="1" (click)="easyMode($event)">4:4</button>
+          <button mat-stroked-button class="choose-but" id="1" (click)="easyMode()">4:4</button>
           <button mat-stroked-button class="choose-but" id="2" (click)="mediumMode($event)">6:6</button>
           <button mat-stroked-button class="choose-but" id="3" (click)="hardMode($event)">8:8</button>
         </div>
 
         <div class="timer size">
           {{timer}}
-<!--          <button (click)="stopTimer()">Stop</button>-->
+                   <!-- <button (click)="showCongrat()">Stop</button> -->
         </div>
 
         <div class="but-logout size">
@@ -48,8 +48,4 @@
   <ng-template #loading>
     ...Loading
   </ng-template>
-
-  <!-- <ng-template > -->
-  <!--    <app-login #login></app-login>-->
-  <!-- </ng-template> -->
 </div>

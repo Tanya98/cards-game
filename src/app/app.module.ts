@@ -14,7 +14,6 @@ import { SecuredLayoutComponent } from './shared/layout/secured-layout';
 import { PublicLayoutComponent } from './shared/layout/public-layout';
 import { NotFoundComponent } from './shared/not-found';
 import { StartPageComponent } from './shared/start-page/start-page.component';
-// import { LoginComponent } from './features/account/login/login.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NebularModule } from './shared/nebular/nebular.module';
 import { StoreModule } from '@ngrx/store';
@@ -25,7 +24,9 @@ import { CardsService } from './core/services/cards.service';
 import { CardpageModule } from './features/cardpage/cardpage.module';
 import { LoginModule } from './features/account/login/login.module';
 import { ValidatorService } from './core/services/validator.service';
-import {RatingModule} from './features/rating/rating.module';
+import { RatingModule } from './features/rating/rating.module';
+import { CongratulationComponent } from './features/congratulation/congratulation.component';
+import { CongratulationModule } from './features/congratulation/congratulation.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,6 @@ import {RatingModule} from './features/rating/rating.module';
     PublicLayoutComponent,
     StartPageComponent,
     NotFoundComponent,
-    // LoginComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +48,7 @@ import {RatingModule} from './features/rating/rating.module';
     CardpageModule,
     LoginModule,
     RatingModule,
+    CongratulationModule,
     // StoreModule.forRoot(rootReducer(), {
     //   runtimeChecks: {
     //     strictStateImmutability: true,

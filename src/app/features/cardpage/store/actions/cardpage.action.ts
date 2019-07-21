@@ -55,7 +55,7 @@ export class MatchCardsSuccessAction implements Action {
 
 export class WinAction implements Action {
   readonly type = WIN;
-  constructor() { }
+  constructor(public congratulation: any) { }
 }
 
 export class MatchCardsFailedAction implements Action {
@@ -70,6 +70,6 @@ export class ShowText implements Action {
 
 export type Action =
   GetallCards | SetCards | SelectOneCard |
-  DeleteCards | TryMatchCardsAction | WinAction|
+  DeleteCards | TryMatchCardsAction | WinAction |
   MatchCardsFailedAction | MatchCardsSuccessAction |
-  SetOneCard|ClearAll;
+  SetOneCard | ClearAll;

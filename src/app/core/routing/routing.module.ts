@@ -33,6 +33,11 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('../../features/rating/rating.module').then(m => m.RatingModule)
       },
+      {
+        path: '',
+        loadChildren: () => import('../../features/congratulation/congratulation.module').then(m => m.CongratulationModule)
+      },
+
 
     ]
   },

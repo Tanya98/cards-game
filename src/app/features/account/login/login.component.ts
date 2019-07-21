@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     // public allInfo = [],
 
-) {
+  ) {
 
     this.form = this.formBuilder.group({
       email: ['', [Validators.required, this.validator.validEmail]],
@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     let getAllInfo = localStorage.getItem('allInfo');
-     if(getAllInfo === null){
-       let allInfo = JSON.stringify(this.allInfo);
-       localStorage.setItem('allInfo',allInfo);
-     }
+    if (getAllInfo === null) {
+      let allInfo = JSON.stringify(this.allInfo);
+      localStorage.setItem('allInfo', allInfo);
+    }
   }
 
   goPlay(value) {
