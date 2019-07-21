@@ -1,0 +1,41 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #413fa0;
+
+    .content {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        background: white;
+        height: 200px;
+        text-align: center;
+        width: 300px;
+        border-radius: 5px;
+    }
+
+    .title {
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .text {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .but-arrow {
+        border: 0;
+        padding: 10px;
+        border-radius: 3px;
+        color: #413fa0;
+        background: white;
+        font-size: 20px;
+        font-weight: 500;
+        margin-top: 30px;
+        cursor: pointer;
+    }
+}
