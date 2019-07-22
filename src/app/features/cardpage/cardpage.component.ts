@@ -46,7 +46,8 @@ export class CardpageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.easyMode();
+    this.cardsService.getCards(this._4X4);
+    this.changeMode();
 
     this.selectedCardsSubscription = this.selectedCards$.pipe(
       filter(sl => !!sl[0] && !!sl[1])
@@ -119,15 +120,15 @@ export class CardpageComponent implements OnInit, OnDestroy {
     const userInfo = localStorage.getItem('userInfo');
     const info = JSON.parse(userInfo);
     if (this.timer !== 0) {
-      debugger;
-      if (this._4X4 && this.cards.length === 0) {
+      // debugger;
+      if (this.easyMode && this.cards.length === 0) {
         info.timerPlaygroundFirst = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
         this.showCongrat();
       }
 
-      if (this.getEventTarget === '2' && this.cards.length === 0) {
+      if(this.getEventTarget === '2' && this.cards.length === 0) {
         debugger;
         info.timerPlaygroundSecond = this.timer;
         const user = JSON.stringify(info);
@@ -135,7 +136,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
         this.showCongrat();
       }
 
-      if (this.getEventTarget === '3' && this.cards.length === 0) {
+      if(this.getEventTarget === '3' && this.cards.length === 0) {
         info.timerPlaygroundThird = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
