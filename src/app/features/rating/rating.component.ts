@@ -32,6 +32,9 @@ export class RatingComponent implements OnInit {
             if ( a.timerPlaygroundFirst !== undefined && b.timerPlaygroundFirst !== undefined) {
               return a.timerPlaygroundFirst - b.timerPlaygroundFirst;
             }
+            if(a.timerPlaygroundFirst == undefined || b.timerPlaygroundFirst !== undefined){
+              return a = null;
+            }
         });
 
         this.bestUsers = this.sortedUsers4x4.slice(0,this.bestUsersNumber);

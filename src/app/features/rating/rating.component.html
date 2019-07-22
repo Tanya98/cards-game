@@ -5,30 +5,36 @@
   <div class="block-field">
     <p class="title">First field rating</p>
   <ng-container *ngFor="let user of bestUsers">
-  <mat-list>
-    <mat-list-item>{{user.email}} {{user.timerPlaygroundFirst}}</mat-list-item>
+
+  <mat-list *ngIf="user.timerPlaygroundFirst">
+    <mat-list-item>{{user.email}} <span>{{user.timerPlaygroundFirst}}</span></mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
+
   </ng-container>
   </div>
 
   <div class="block-field">
     <p class="title">Second field rating</p>
     <ng-container *ngFor="let user of bestUsers">
-    <mat-list>
+
+    <mat-list *ngIf="user.timerPlaygroundSecond">
       <mat-list-item>{{user.email}} {{user.timerPlaygroundSecond}}</mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
+
   </ng-container>
   </div>
 
   <div class="block-field block">
     <p class="title">Third field rating</p>
     <ng-container *ngFor="let user of bestUsers">
-    <mat-list>
+
+    <mat-list *ngIf="user.timerPlaygroundThird">
       <mat-list-item>{{user.email}} {{user.timerPlaygroundThird}}</mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
+
   </ng-container>
   </div>
 
