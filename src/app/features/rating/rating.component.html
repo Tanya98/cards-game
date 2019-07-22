@@ -7,7 +7,11 @@
   <ng-container *ngFor="let user of bestUsers">
 
   <mat-list *ngIf="user.timerPlaygroundFirst">
-    <mat-list-item>{{user.email}} <span>{{user.timerPlaygroundFirst}}</span></mat-list-item>
+    <mat-list-item>
+      <div class="block-text">
+      {{user.email}} <span>{{user.timerPlaygroundFirst}}</span>
+      </div>
+    </mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
 
@@ -19,7 +23,11 @@
     <ng-container *ngFor="let user of bestUsers">
 
     <mat-list *ngIf="user.timerPlaygroundSecond">
-      <mat-list-item>{{user.email}} {{user.timerPlaygroundSecond}}</mat-list-item>
+      <mat-list-item>
+        <div class="block-text">
+          {{user.email}} <span>{{user.timerPlaygroundSecond}}</span>
+        </div>
+      </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
 
@@ -31,7 +39,11 @@
     <ng-container *ngFor="let user of bestUsers">
 
     <mat-list *ngIf="user.timerPlaygroundThird">
-      <mat-list-item>{{user.email}} {{user.timerPlaygroundThird}}</mat-list-item>
+      <mat-list-item>
+        <div class="block-text">
+          {{user.email}} <span>{{user.timerPlaygroundThird}}</span>
+        </div>
+      </mat-list-item>
       <mat-divider></mat-divider>
     </mat-list>
 
