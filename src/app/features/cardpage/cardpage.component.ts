@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, DoCheck, AfterViewInit, Templa
 import { CardsService } from '../../core/services/cards.service';
 import { interval, Observable, Subject, Subscription } from 'rxjs';
 import { Card } from '../../core/models/card';
-import { filter, map, takeUntil, tap } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { User } from '../../core/models/user';
 import { Router } from '@angular/router';
 
@@ -20,15 +20,16 @@ export class CardpageComponent implements OnInit, OnDestroy {
   hasFlippedCard = false;
   timer = 0;
   stream: Observable<any>;
-  getEventTarget: any;
+  currentMode: number;
   timerSubscription: Subscription;
   cardsSubscription: Subscription;
   selectedCardsSubscription: Subscription;
   stopPlay$: Subject<any> = new Subject();
-  _4X4: number = 16;
-  _6X6: number = 36;
-  _8X8: number = 64;
-
+  _4X4 = 4; // 16
+  _6X6 = 6; // 36
+  _8X8 = 8; // 64
+  cellWidth = 130;
+  playgroundSize = 4;
 
   constructor(private cardsService: CardsService, private router: Router) {
 
@@ -39,15 +40,16 @@ export class CardpageComponent implements OnInit, OnDestroy {
         this.cards = cards;
         if (!this.cards.length) {
           this.stopTimer();
-          // this.countTicks();
+
         }
       })
     ).subscribe();
   }
 
   ngOnInit() {
-    this.cardsService.getCards(this._4X4);
+    this.cardsService.getCards(this._4X4 * this._4X4);
     this.changeMode();
+    this.currentMode = this._4X4;
 
     this.selectedCardsSubscription = this.selectedCards$.pipe(
       filter(sl => !!sl[0] && !!sl[1])
@@ -66,21 +68,11 @@ export class CardpageComponent implements OnInit, OnDestroy {
     }, 700);
   }
 
-  easyMode() {
-    this.cardsService.getCards(this._4X4);
+  changeModeEventHandler(mode: number) {
+    this.currentMode = mode;
+    this.playgroundSize = mode;
+    this.cardsService.getCards(mode * mode);
     this.changeMode();
-  }
-
-  mediumMode(event) {
-    this.cardsService.getCards(this._6X6);
-    this.changeMode();
-    this.getEventTarget = event.target.id;
-  }
-
-  hardMode(event) {
-    this.cardsService.getCards(this._8X8);
-    this.changeMode();
-    this.getEventTarget = event.target.id;
   }
 
   changeMode() {
@@ -113,30 +105,27 @@ export class CardpageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.cardsSubscription.unsubscribe();
     this.selectedCardsSubscription.unsubscribe();
-    // this.timerSubscription.unsubscribe();
   }
 
   countTicks() {
     const userInfo = localStorage.getItem('userInfo');
     const info = JSON.parse(userInfo);
     if (this.timer !== 0) {
-      // debugger;
-      if (this.easyMode && this.cards.length === 0) {
+      if (this.currentMode === this._4X4 && this.cards.length === 0) {
         info.timerPlaygroundFirst = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
         this.showCongrat();
       }
 
-      if(this.getEventTarget === '2' && this.cards.length === 0) {
-        debugger;
+      if (this.currentMode === this._6X6 && this.cards.length === 0) {
         info.timerPlaygroundSecond = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
         this.showCongrat();
       }
 
-      if(this.getEventTarget === '3' && this.cards.length === 0) {
+      if (this.currentMode === this._8X8 && this.cards.length === 0) {
         info.timerPlaygroundThird = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);

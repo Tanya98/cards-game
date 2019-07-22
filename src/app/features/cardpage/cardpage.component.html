@@ -9,14 +9,14 @@
         </div>
 
         <div class="block-but size">
-          <button  class="choose-but" id="1" (click)="easyMode()">4:4</button>
-          <button mat-stroked-button class="choose-but" id="2" (click)="mediumMode($event)">6:6</button>
-          <button mat-stroked-button class="choose-but" id="3" (click)="hardMode($event)">8:8</button>
+          <button class="choose-but" (click)="changeModeEventHandler(_4X4)">4:4</button>
+          <button mat-stroked-button class="choose-but" (click)="changeModeEventHandler(_6X6)">6:6</button>
+          <button mat-stroked-button class="choose-but" (click)="changeModeEventHandler(_8X8)">8:8</button>
         </div>
 
         <div class="timer size">
           {{timer}}
-                    <button (click)="stopTimer()">Stop</button>
+          <button (click)="countTicks()">Stop</button>
         </div>
 
         <div class="but-logout size">
@@ -29,21 +29,20 @@
 
   <main>
 
-    <div class="content" *ngIf="cards; else loading"
-      [ngClass]="{'content2': cards.length>16,'content3': cards.length >36}">
+    <div class="content" *ngIf="cards; else loading" [style.width.px]="cellWidth * playgroundSize">
       <ng-container *ngFor="let card of cards">
         <div class="block-cards">
 
-        <div class="card" (click)="addClass(card)">
-          <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
-            <div class="front">
-              <img src="assets/images/logo.png" class="logo">
-            </div>
-            <div class="back">
-              <img class="card-img" src="{{card.img}}" alt="img">
+          <div class="card" (click)="addClass(card)">
+            <div class="flipper" [class.show]="card == activeCard" (click)="selectCard(card)">
+              <div class="front">
+                <img src="assets/images/logo.png" class="logo">
+              </div>
+              <div class="back">
+                <img class="card-img" src="{{card.img}}" alt="img">
+              </div>
             </div>
           </div>
-        </div>
 
         </div>
       </ng-container>
