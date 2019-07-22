@@ -16,17 +16,18 @@ export class CongratulationComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-    //     this.allInfo = JSON.parse(localStorage.getItem('allInfo'));
-    //     this.allInfo.forEach(user => {
-    //         if (user.timerPlaygroundFirst) {
-    //             this.score = user.timerPlaygroundFirst;
-    //         }
-    //         if (user.timerPlaygroundSecond) {
-    //             this.score = user.timerPlaygroundSecond;
-    //         }
-    //         if (user.timerPlaygroundThird) {
-    //             this.score = user.timerPlaygroundThird;
-    //         }
-    //     });
+        this.allInfo = JSON.parse(localStorage.getItem('allInfo'));
+        this.allInfo.forEach(user => {
+          // debugger;
+            if (user.timerPlaygroundFirst) {
+               return this.score = user.timerPlaygroundFirst;
+            }
+            if (user.timerPlaygroundSecond) {
+               return this.score = user.timerPlaygroundSecond;
+            }
+            if (user.timerPlaygroundThird) {
+               return this.score = user.timerPlaygroundThird;
+            }
+        });
     }
 }
