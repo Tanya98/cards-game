@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from "@angular/forms";
-import { ValidatorService } from "../../../core/services/validator.service";
-import { Router } from "@angular/router";
+import { FormBuilder, Validators } from '@angular/forms';
+import { ValidatorService } from '../../../core/services/validator.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
     public formBuilder: FormBuilder,
     public validator: ValidatorService,
     public router: Router,
-    // public allInfo = [],
 
   ) {
 
@@ -28,9 +27,9 @@ export class LoginComponent implements OnInit {
     });
   }
   ngOnInit() {
-    let getAllInfo = localStorage.getItem('allInfo');
+    const getAllInfo = localStorage.getItem('allInfo');
     if (getAllInfo === null) {
-      let allInfo = JSON.stringify(this.allInfo);
+      const allInfo = JSON.stringify(this.allInfo);
       localStorage.setItem('allInfo', allInfo);
     }
   }
