@@ -1,80 +1,81 @@
 .block-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: #413fa0;
-  font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #413fa0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .form {
-  //@include flex(flex, column, center, nowrap);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
-  width: 380px;
-  height: 380px;
-  padding: 20px;
-  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
-  align-items: center;
-  background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 380px;
+    height: 380px;
+    padding: 20px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12);
+    align-items: center;
+    background: white;
 }
 
 input {
-  width: 300px;
-  padding: 5px 5px;
-  &:focus {
-    outline-color: red;
-  }
+    width: 300px;
+    padding: 5px 5px;
+
+    &:focus {
+        outline-color: red;
+    }
 }
 
 label {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .required {
-  color: red;
+    color: red;
 }
 
 .form h3 {
-  text-transform: uppercase;
-  font-size: 20px;
+    text-transform: uppercase;
+    font-size: 20px;
 }
 
 .user-info {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .but-login {
-  background: #413fa0;
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  border: 0;
-  margin: 0 auto;
-  padding: 10px 15px;
-  cursor: pointer;
-  margin-top: 25px;
-  &:focus {
-    outline: none;
-  }
+    background: #413fa0;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    border: 0;
+    margin: 0 auto;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-top: 25px;
+
+    &:focus {
+        outline: none;
+    }
 }
 
 input.ng-valid {
-  &:focus {
-    outline-color: #413fa0;
-  }
+    &:focus {
+        outline-color: #413fa0;
+    }
 }
 
 .error {
-  color: red;
+    color: red;
 }
 
 .forgot-pas {
-  margin-left: auto;
-  color: #413fa0;
-  cursor: pointer;
-  font-weight: 600;
+    margin-left: auto;
+    color: #413fa0;
+    cursor: pointer;
+    font-weight: 600;
 }
