@@ -13,23 +13,23 @@ import { Router } from '@angular/router';
 })
 
 export class CardpageComponent implements OnInit, OnDestroy {
-  cards$: Observable<Card[]>;
-  selectedCards$: Observable<Card[]>;
-  cards: Card[];
-  activeCard: Card;
-  hasFlippedCard = false;
-  timer = 0;
-  stream: Observable<any>;
-  currentMode: number;
-  timerSubscription: Subscription;
-  cardsSubscription: Subscription;
-  selectedCardsSubscription: Subscription;
-  stopPlay$: Subject<any> = new Subject();
-  _4X4 = 4; // 16
-  _6X6 = 6; // 36
-  _8X8 = 8; // 64
-  cellWidth = 130;
-  playgroundSize = 4;
+  public cards$: Observable<Card[]>;
+  public selectedCards$: Observable<Card[]>;
+  public cards: Card[];
+  public activeCard: Card;
+  public hasFlippedCard: boolean = false;
+  public timer: number = 0;
+  public stream: Observable<any>;
+  public currentMode: number;
+  public timerSubscription: Subscription;
+  public cardsSubscription: Subscription;
+  public selectedCardsSubscription: Subscription;
+  public stopPlay$: Subject<any> = new Subject();
+  public _4X4: number = 4; // 16
+  public _6X6: number = 6; // 36
+  public _8X8: number = 8; // 64
+  public cellWidth: number = 130;
+  public playgroundSize: number = 4;
 
   constructor(private cardsService: CardsService, private router: Router) {
 
@@ -40,7 +40,6 @@ export class CardpageComponent implements OnInit, OnDestroy {
         this.cards = cards;
         if (!this.cards.length) {
           this.stopTimer();
-
         }
       })
     ).subscribe();
@@ -54,7 +53,8 @@ export class CardpageComponent implements OnInit, OnDestroy {
     this.selectedCardsSubscription = this.selectedCards$.pipe(
       filter(sl => !!sl[0] && !!sl[1])
     ).subscribe(sl => {
-      if (sl[0].pairId === sl[1].pairId) {
+      // debugger;
+      if (sl[0].pairId === sl[1].pairId && sl[0].id !== sl[1].id) {
         return this.cardsService.deleteCards();
       } else {
         return this.cardsService.clear();
@@ -109,8 +109,9 @@ export class CardpageComponent implements OnInit, OnDestroy {
 
   countTicks() {
     const userInfo = localStorage.getItem('userInfo');
-    const info = JSON.parse(userInfo);
+    const info: User = JSON.parse(userInfo);
     if (this.timer !== 0) {
+      // debugger;
       if (this.currentMode === this._4X4 && this.cards.length === 0) {
         info.timerPlaygroundFirst = this.timer;
         const user = JSON.stringify(info);
@@ -119,6 +120,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
       }
 
       if (this.currentMode === this._6X6 && this.cards.length === 0) {
+        debugger;
         info.timerPlaygroundSecond = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
@@ -126,6 +128,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
       }
 
       if (this.currentMode === this._8X8 && this.cards.length === 0) {
+        debugger;
         info.timerPlaygroundThird = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
@@ -142,6 +145,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
     if (getAllInfo.length === 0 && getUser.timerPlaygroundFirst ||
       getAllInfo.length === 0 && getUser.timerPlaygroundSecond ||
       getAllInfo.length === 0 && getUser.timerPlaygroundThird) {
+      // debugger;
       getAllInfo.push(getUser);
       const newInfo = JSON.stringify(getAllInfo);
       localStorage.setItem('allInfo', newInfo);
