@@ -9,26 +9,32 @@ import { User } from 'src/app/core/models/user';
 
 export class CongratulationComponent implements OnInit {
 
-    public allInfo: User[] = [];
+    public user: User;
     public score: number;
 
     constructor() { }
 
     ngOnInit() {
-        this.allInfo = JSON.parse(localStorage.getItem('userInfo'));
-        this.allInfo.forEach(user => {
-            if (user.timerPlaygroundFirst) {
-                this.score = user.timerPlaygroundFirst;
-            }
+        this.user = JSON.parse(localStorage.getItem('userInfo'));
+        if (this.user.timerPlaygroundFirst) {
+            this.score = this.user.timerPlaygroundFirst;
+            delete this.user.timerPlaygroundFirst;
+            const updatedUser = JSON.stringify(this.user);
+            localStorage.setItem('userInfo', updatedUser);
+        }
 
-            else if (user.timerPlaygroundSecond) {
-                this.score = user.timerPlaygroundSecond;
-            }
+        if (this.user.timerPlaygroundSecond) {
+            this.score = this.user.timerPlaygroundSecond;
+            delete this.user.timerPlaygroundSecond;
+            const updatedUser = JSON.stringify(this.user);
+            localStorage.setItem('userInfo', updatedUser);
+        }
 
-            else if (user.timerPlaygroundThird) {
-              this.score = user.timerPlaygroundThird;
-            }
-        });
-
+        if (this.user.timerPlaygroundThird) {
+            this.score = this.user.timerPlaygroundThird;
+            delete this.user.timerPlaygroundThird;
+            const updatedUser = JSON.stringify(this.user);
+            localStorage.setItem('userInfo', updatedUser);
+        }
     }
 }

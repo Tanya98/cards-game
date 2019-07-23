@@ -10,7 +10,7 @@ import { User } from 'src/app/core/models/user';
 export class RatingComponent implements OnInit {
 
   public bestUsersNumber: number = 5;
-  public bestUsers = [];
+  public bestUsers: User[] = [];
   public sortedUsers4x4: User[] = [];
   public sortedUsers6x6: User[] = [];
   public sortedUsers8x8: User[] = [];
@@ -31,9 +31,6 @@ export class RatingComponent implements OnInit {
       this.bestUsers = this.sortedUsers4x4 = [];
       if (a.timerPlaygroundFirst !== undefined && b.timerPlaygroundFirst !== undefined) {
         return a.timerPlaygroundFirst - b.timerPlaygroundFirst;
-      }
-      if (a.timerPlaygroundFirst == undefined || b.timerPlaygroundFirst !== undefined) {
-        return a = null;
       }
     });
 
