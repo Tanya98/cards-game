@@ -110,33 +110,24 @@ export class CardpageComponent implements OnInit, OnDestroy {
     const userInfo = localStorage.getItem('userInfo');
     const info: User = JSON.parse(userInfo);
     if (this.timer !== 0) {
-      // debugger;
       if (this.currentMode === this._4X4 && this.cards.length === 0) {
         info.timerPlaygroundFirst = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
-        this.addUser();
-        // this.showCongrat();
       }
 
       if (this.currentMode === this._6X6 && this.cards.length === 0) {
-        // debugger;
         info.timerPlaygroundSecond = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
-        this.addUser();
-
-        // this.showCongrat();
       }
 
       if (this.currentMode === this._8X8 && this.cards.length === 0) {
-        // debugger;
         info.timerPlaygroundThird = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
-        this.addUser();
-        // this.showCongrat();
       }
+      this.addUser();
     }
   }
 
@@ -147,7 +138,6 @@ export class CardpageComponent implements OnInit, OnDestroy {
     if (getAllInfo.length === 0 && getUser.timerPlaygroundFirst ||
       getAllInfo.length === 0 && getUser.timerPlaygroundSecond ||
       getAllInfo.length === 0 && getUser.timerPlaygroundThird) {
-      debugger;
       getAllInfo.push(getUser);
       const newInfo = JSON.stringify(getAllInfo);
       localStorage.setItem('allInfo', newInfo);
@@ -156,14 +146,12 @@ export class CardpageComponent implements OnInit, OnDestroy {
 
     getAllInfo.forEach(user => {
       if (user.email === getUser.email) {
-        debugger;
         const deleteUser = getAllInfo.filter(x => x.email !== getUser.email);
         deleteUser.push(getUser);
         const newUser = JSON.stringify(deleteUser);
         localStorage.setItem('allInfo', newUser);
       }
       if (user.email !== getUser.email) {
-        debugger;
         getAllInfo.push(getUser);
         const newUser = JSON.stringify(getAllInfo);
         localStorage.setItem('allInfo', newUser);
