@@ -53,7 +53,6 @@ export class CardpageComponent implements OnInit, OnDestroy {
     this.selectedCardsSubscription = this.selectedCards$.pipe(
       filter(sl => !!sl[0] && !!sl[1])
     ).subscribe(sl => {
-      // debugger;
       if (sl[0].pairId === sl[1].pairId && sl[0].id !== sl[1].id) {
         return this.cardsService.deleteCards();
       } else {
@@ -116,25 +115,28 @@ export class CardpageComponent implements OnInit, OnDestroy {
         info.timerPlaygroundFirst = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
-        this.showCongrat();
+        this.addUser();
+        // this.showCongrat();
       }
 
       if (this.currentMode === this._6X6 && this.cards.length === 0) {
-        debugger;
+        // debugger;
         info.timerPlaygroundSecond = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
-        this.showCongrat();
+        this.addUser();
+
+        // this.showCongrat();
       }
 
       if (this.currentMode === this._8X8 && this.cards.length === 0) {
-        debugger;
+        // debugger;
         info.timerPlaygroundThird = this.timer;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
-        this.showCongrat();
+        this.addUser();
+        // this.showCongrat();
       }
-      this.addUser();
     }
   }
 
@@ -145,23 +147,28 @@ export class CardpageComponent implements OnInit, OnDestroy {
     if (getAllInfo.length === 0 && getUser.timerPlaygroundFirst ||
       getAllInfo.length === 0 && getUser.timerPlaygroundSecond ||
       getAllInfo.length === 0 && getUser.timerPlaygroundThird) {
-      // debugger;
+      debugger;
       getAllInfo.push(getUser);
       const newInfo = JSON.stringify(getAllInfo);
       localStorage.setItem('allInfo', newInfo);
+      this.showCongrat();
     }
 
     getAllInfo.forEach(user => {
       if (user.email === getUser.email) {
+        debugger;
         const deleteUser = getAllInfo.filter(x => x.email !== getUser.email);
         deleteUser.push(getUser);
         const newUser = JSON.stringify(deleteUser);
         localStorage.setItem('allInfo', newUser);
       }
       if (user.email !== getUser.email) {
+        debugger;
         getAllInfo.push(getUser);
         const newUser = JSON.stringify(getAllInfo);
         localStorage.setItem('allInfo', newUser);
+        this.showCongrat();
+
       }
     });
   }
