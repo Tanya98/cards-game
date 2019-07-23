@@ -143,8 +143,8 @@ export class CardpageComponent implements OnInit, OnDestroy {
       getAllInfo.length === 0 && getUser.timerPlaygroundSecond ||
       getAllInfo.length === 0 && getUser.timerPlaygroundThird) {
       getAllInfo.push(getUser);
-      const newUser = JSON.stringify(getAllInfo);
-      localStorage.setItem('allInfo', newUser);
+      const newInfo = JSON.stringify(getAllInfo);
+      localStorage.setItem('allInfo', newInfo);
     }
 
     getAllInfo.forEach(user => {
