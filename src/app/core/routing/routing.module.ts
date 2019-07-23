@@ -37,8 +37,6 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('../../features/congratulation/congratulation.module').then(m => m.CongratulationModule)
       },
-
-
     ]
   },
   {
