@@ -56,8 +56,7 @@ export class CardpageComponent implements OnInit {
     ).subscribe(sl => {
       if (sl[0].pairId === sl[1].pairId && sl[0].id !== sl[1].id) {
         return this.cardsService.deleteCards();
-      }
-      else {
+      } else {
         return this.cardsService.clear();
       }
     });
@@ -107,12 +106,6 @@ export class CardpageComponent implements OnInit {
     this.count = 0;
   }
 
-  clean() {
-    this.cards = [];
-    this.stopTimer();
-    this.showCongrat();
-  }
-
   addScore() {
     const userInfo = localStorage.getItem('userInfo');
     const info: User = JSON.parse(userInfo);
@@ -121,22 +114,26 @@ export class CardpageComponent implements OnInit {
         info.timerPlaygroundFirst = this.count;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
+        this.showCongrat();
       }
 
       if (this.currentMode === this._6X6 && this.cards.length === 0) {
         info.timerPlaygroundSecond = this.count;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
+        this.showCongrat();
+
       }
 
       if (this.currentMode === this._8X8 && this.cards.length === 0) {
         info.timerPlaygroundThird = this.count;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
+        this.showCongrat();
+
       }
     }
   }
-
   ngOnDestroy() {
     this.cardsSubscription.unsubscribe();
     this.selectedCardsSubscription.unsubscribe();

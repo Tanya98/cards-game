@@ -21,14 +21,10 @@ import { rootReducer } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpModule } from './core/http/http.module';
 import { CardsService } from './core/services/cards.service';
-import { CardpageModule } from './features/cardpage/cardpage.module';
 import { LoginModule } from './features/account/login/login.module';
 import { ValidatorService } from './core/services/validator.service';
 import { RatingModule } from './features/rating/rating.module';
-import { CongratulationComponent } from './features/congratulation/congratulation.component';
 import { CongratulationModule } from './features/congratulation/congratulation.module';
-import { CardpageComponent } from './features/cardpage/cardpage.component';
-import { CardModule } from './features/cardpage/card/card.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +33,6 @@ import { CardModule } from './features/cardpage/card/card.module';
     PublicLayoutComponent,
     StartPageComponent,
     NotFoundComponent,
-    // CardpageComponent
   ],
   imports: [
     CommonModule,
@@ -48,8 +43,6 @@ import { CardModule } from './features/cardpage/card/card.module';
     RoutingModule,
     LayoutModule,
     HttpModule,
-    // CardpageModule,
-    // CardModule,
     LoginModule,
     RatingModule,
     CongratulationModule,

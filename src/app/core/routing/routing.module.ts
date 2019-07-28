@@ -3,9 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StartPageComponent } from 'src/app/shared/start-page/start-page.component';
 import { NotFoundComponent } from 'src/app/shared/not-found';
 import { PublicLayoutComponent } from '../../shared/layout/public-layout';
-import { SecuredLayoutComponent } from "../../shared/layout/secured-layout";
-import { CardpageComponent } from 'src/app/features/cardpage/cardpage.component';
-import { CardComponent } from 'src/app/features/cardpage/card/card.component';
+import { SecuredLayoutComponent } from '../../shared/layout/secured-layout';
 
 const routes: Routes = [
   {
@@ -30,17 +28,6 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('../../features/cardpage/cardpage.module').then(m => m.CardpageModule)
       },
-      // {
-      //   path: 'cardpage',
-      //   component: CardpageComponent,
-      //   children: [
-      // {
-      //   path: '',
-      //   loadChildren: () => import('../../features/cardpage/card/card.module').then(m => m.CardModule)
-      // },
-      //   ]
-      // },
-
       {
         path: '',
         loadChildren: () => import('../../features/rating/rating.module').then(m => m.RatingModule)

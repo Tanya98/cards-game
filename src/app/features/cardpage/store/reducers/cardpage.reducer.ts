@@ -49,11 +49,6 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
       };
     }
 
-    case fromAction.WIN: {
-      return {
-        ...state,
-      };
-    }
     //
     // case fromAction.TRY_MATCH_CARDS: {
     //   return {

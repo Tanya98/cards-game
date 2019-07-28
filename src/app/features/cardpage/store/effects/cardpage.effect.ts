@@ -29,15 +29,6 @@ export class CardpageEffect {
     })
   );
 
-  @Effect()
-  win$ = this.actions$.pipe(
-    ofType(fromAction.WIN),
-    switchMap(() => {
-      // debugger;
-      return this.router.navigate(['congratulation']);
-      //  return new fromAction.WinAction();
-    })
-  );
   // @Effect()
   // selectCard$ = this.actions$.pipe(
   //   ofType(fromAction.SELECTED_ONE_CARD),
