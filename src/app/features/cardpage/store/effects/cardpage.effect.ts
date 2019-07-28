@@ -1,16 +1,18 @@
-import {act, Actions, Effect, ofType} from '@ngrx/effects';
+import { act, Actions, Effect, ofType } from '@ngrx/effects';
 import { DataService } from '../../../../core/services/data.service';
 import * as fromAction from '../actions/cardpage.action';
-import {map, switchMap, tap, take, concatMap, withLatestFrom, filter, flatMap, mergeMap} from 'rxjs/operators';
+import { map, switchMap, tap, take, concatMap, withLatestFrom, filter, flatMap, mergeMap } from 'rxjs/operators';
 import { Card } from '../../../../core/models/card';
-import {select, Store} from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { CardPageState } from '../reducers/cardpage.reducer';
+import { Router } from '@angular/router';
 
 export class CardpageEffect {
   constructor(
     private actions$: Actions,
     private dataService: DataService,
     private store: Store<CardPageState>,
+    private router:Router,
   ) { }
 
   @Effect()
@@ -27,6 +29,15 @@ export class CardpageEffect {
     })
   );
 
+  @Effect()
+  win$ = this.actions$.pipe(
+    ofType(fromAction.WIN),
+    switchMap(() => {
+      // debugger;
+      return this.router.navigate(['congratulation']);
+      //  return new fromAction.WinAction();
+    })
+  );
   // @Effect()
   // selectCard$ = this.actions$.pipe(
   //   ofType(fromAction.SELECTED_ONE_CARD),

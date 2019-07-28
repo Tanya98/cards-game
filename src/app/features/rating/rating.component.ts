@@ -28,6 +28,7 @@ export class RatingComponent implements OnInit {
     console.log(this.allUsers);
 
     this.sortedUsers4x4 = this.allUsers.sort((a, b) => {
+      // debugger;
       if (a.timerPlaygroundFirst !== undefined && b.timerPlaygroundFirst !== undefined) {
         return a.timerPlaygroundFirst - b.timerPlaygroundFirst;
       }
@@ -36,6 +37,7 @@ export class RatingComponent implements OnInit {
     this.bestUsers = this.sortedUsers4x4.slice(0, this.bestUsersNumber);
 
     this.sortedUsers6x6 = this.allUsers.sort((a, b) => {
+      // debugger;
       if (a.timerPlaygroundSecond !== undefined && b.timerPlaygroundFirst !== undefined) {
         return a.timerPlaygroundSecond - b.timerPlaygroundSecond;
       }
@@ -44,6 +46,7 @@ export class RatingComponent implements OnInit {
     this.bestUsers = this.sortedUsers6x6.slice(0, this.bestUsersNumber);
 
     this.sortedUsers8x8 = this.allUsers.sort((a, b) => {
+      // debugger;
       if (a.timerPlaygroundThird !== undefined || b.timerPlaygroundThird !== undefined) {
         return a.timerPlaygroundThird - b.timerPlaygroundThird;
       }

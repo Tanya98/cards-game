@@ -10,12 +10,13 @@
 
         <div class="block-but size">
           <button class="choose-but" (click)="changeModeEventHandler(_4X4)">4:4</button>
-          <button mat-stroked-button class="choose-but" (click)="changeModeEventHandler(_6X6)">6:6</button>
-          <button mat-stroked-button class="choose-but" (click)="changeModeEventHandler(_8X8)">8:8</button>
+          <button class="choose-but" (click)="changeModeEventHandler(_6X6)">6:6</button>
+          <button class="choose-but" (click)="changeModeEventHandler(_8X8)">8:8</button>
+          <button (click)='clean()'>Clean Array</button>
         </div>
 
         <div class="timer size">
-          {{timer}}
+          {{count}}
         </div>
 
         <div class="but-logout size">
@@ -25,7 +26,7 @@
       </nb-layout-header>
     </nb-layout>
   </header>
-
+  <router-outlet></router-outlet>
   <main>
 
     <div class="content" *ngIf="cards; else loading" [style.width.px]="cellWidth * playgroundSize">

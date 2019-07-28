@@ -31,9 +31,10 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
 
     case fromAction.DELETE_CARDS: {
       let newCards;
-      state.selectedCard.forEach(card => {
-        return newCards = state.cards.filter(sl => sl.pairId !== card.pairId);
+      state.selectedCard.forEach(sl => {
+        return newCards = state.cards.filter(card => card.pairId !== sl.pairId);
       });
+
       return {
         ...state,
         cards: newCards,
@@ -48,13 +49,11 @@ export const cardpageReducer = (state = cardPageInitialState, action: fromAction
       };
     }
 
-    // case fromAction.WIN: {
-    //   return {
-    //     ...state,
-    //     selectedCard: [],
-    //     showCongratulation: action.congratulation
-    //   };
-    // }
+    case fromAction.WIN: {
+      return {
+        ...state,
+      };
+    }
     //
     // case fromAction.TRY_MATCH_CARDS: {
     //   return {

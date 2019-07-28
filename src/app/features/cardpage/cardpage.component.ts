@@ -12,16 +12,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./cardpage.component.scss']
 })
 
-export class CardpageComponent implements OnInit, OnDestroy {
+export class CardpageComponent implements OnInit {
   public cards$: Observable<Card[]>;
   public selectedCards$: Observable<Card[]>;
   public cards: Card[];
   public activeCard: Card;
   public hasFlippedCard: boolean = false;
-  public timer: number = 0;
-  public stream: Observable<any>;
+  public count: number = 0;
+  public timer$: Observable<any>;
   public currentMode: number;
-  public timerSubscription: Subscription;
+  public countSubscription: Subscription;
   public cardsSubscription: Subscription;
   public selectedCardsSubscription: Subscription;
   public stopPlay$: Subject<any> = new Subject();
@@ -38,6 +38,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
     this.cardsSubscription = this.cards$.pipe(
       tap((cards) => {
         this.cards = cards;
+        this.shuffle(this.cards);
         if (!this.cards.length) {
           this.stopTimer();
         }
@@ -55,10 +56,15 @@ export class CardpageComponent implements OnInit, OnDestroy {
     ).subscribe(sl => {
       if (sl[0].pairId === sl[1].pairId && sl[0].id !== sl[1].id) {
         return this.cardsService.deleteCards();
-      } else {
+      }
+      else {
         return this.cardsService.clear();
       }
     });
+  }
+
+  shuffle(cards) {
+    cards.sort(() => Math.random() - 0.5);
   }
 
   selectCard(card: Card) {
@@ -76,7 +82,7 @@ export class CardpageComponent implements OnInit, OnDestroy {
 
   changeMode() {
     this.stopTimer();
-    this.countTicks();
+    this.addScore();
     this.startTimer();
   }
 
@@ -89,75 +95,50 @@ export class CardpageComponent implements OnInit, OnDestroy {
   }
 
   startTimer() {
-    this.stream = interval(1000);
-    this.stream.pipe(
+    this.timer$ = interval(1000);
+    this.timer$.pipe(
       takeUntil(this.stopPlay$),
-    ).subscribe(v => this.timer = v);
+    ).subscribe(v => this.count = v);
   }
 
   stopTimer() {
     this.stopPlay$.next();
-    this.countTicks();
-    this.timer = 0;
+    this.addScore();
+    this.count = 0;
   }
 
-  ngOnDestroy() {
-    this.cardsSubscription.unsubscribe();
-    this.selectedCardsSubscription.unsubscribe();
+  clean() {
+    this.cards = [];
+    this.stopTimer();
+    this.showCongrat();
   }
 
-  countTicks() {
+  addScore() {
     const userInfo = localStorage.getItem('userInfo');
     const info: User = JSON.parse(userInfo);
-    if (this.timer !== 0) {
+    if (this.count !== 0) {
       if (this.currentMode === this._4X4 && this.cards.length === 0) {
-        info.timerPlaygroundFirst = this.timer;
+        info.timerPlaygroundFirst = this.count;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
       }
 
       if (this.currentMode === this._6X6 && this.cards.length === 0) {
-        info.timerPlaygroundSecond = this.timer;
+        info.timerPlaygroundSecond = this.count;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
       }
 
       if (this.currentMode === this._8X8 && this.cards.length === 0) {
-        info.timerPlaygroundThird = this.timer;
+        info.timerPlaygroundThird = this.count;
         const user = JSON.stringify(info);
         localStorage.setItem('userInfo', user);
       }
-      this.addUser();
     }
   }
 
-  addUser() {
-    const getUser: User = JSON.parse(localStorage.getItem('userInfo'));
-    const getAllInfo = JSON.parse(localStorage.getItem('allInfo'));
-
-    if (getAllInfo.length === 0 && getUser.timerPlaygroundFirst ||
-      getAllInfo.length === 0 && getUser.timerPlaygroundSecond ||
-      getAllInfo.length === 0 && getUser.timerPlaygroundThird) {
-      getAllInfo.push(getUser);
-      const newInfo = JSON.stringify(getAllInfo);
-      localStorage.setItem('allInfo', newInfo);
-      this.showCongrat();
-    }
-
-    getAllInfo.forEach(user => {
-      if (user.email === getUser.email) {
-        const deleteUser = getAllInfo.filter(x => x.email !== getUser.email);
-        deleteUser.push(getUser);
-        const newUser = JSON.stringify(deleteUser);
-        localStorage.setItem('allInfo', newUser);
-      }
-      if (user.email !== getUser.email) {
-        getAllInfo.push(getUser);
-        const newUser = JSON.stringify(getAllInfo);
-        localStorage.setItem('allInfo', newUser);
-        this.showCongrat();
-
-      }
-    });
+  ngOnDestroy() {
+    this.cardsSubscription.unsubscribe();
+    this.selectedCardsSubscription.unsubscribe();
   }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './shared/material/material.module';
@@ -27,6 +27,8 @@ import { ValidatorService } from './core/services/validator.service';
 import { RatingModule } from './features/rating/rating.module';
 import { CongratulationComponent } from './features/congratulation/congratulation.component';
 import { CongratulationModule } from './features/congratulation/congratulation.module';
+import { CardpageComponent } from './features/cardpage/cardpage.component';
+import { CardModule } from './features/cardpage/card/card.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { CongratulationModule } from './features/congratulation/congratulation.m
     PublicLayoutComponent,
     StartPageComponent,
     NotFoundComponent,
+    // CardpageComponent
   ],
   imports: [
     CommonModule,
@@ -45,18 +48,11 @@ import { CongratulationModule } from './features/congratulation/congratulation.m
     RoutingModule,
     LayoutModule,
     HttpModule,
-    CardpageModule,
+    // CardpageModule,
+    // CardModule,
     LoginModule,
     RatingModule,
     CongratulationModule,
-    // StoreModule.forRoot(rootReducer(), {
-    //   runtimeChecks: {
-    //     strictStateImmutability: true,
-    //     strictActionImmutability: true,
-    //     strictStateSerializability: true,
-    //     strictActionSerializability: true,
-    //   },
-    // }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     StoreModule.forRoot(rootReducer()),
     EffectsModule.forRoot([]),
@@ -64,6 +60,8 @@ import { CongratulationModule } from './features/congratulation/congratulation.m
     NebularModule
   ],
   providers: [CardsService, ValidatorService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AppModule { }

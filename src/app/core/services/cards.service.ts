@@ -31,4 +31,8 @@ export class CardsService {
   clear() {
     return this.store.dispatch(new action.ClearAll());
   }
+
+  win(){
+    return this.store.dispatch(new action.WinAction());
+  }
 }
